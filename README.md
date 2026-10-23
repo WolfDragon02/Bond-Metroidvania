@@ -1,6 +1,9 @@
 # Bond-Metroidvania
 CSCI150 Project
-
-I made this edit in the starting of the project
-Jose Made this edit
+Group members:
+Bruce Xiong
+Jose Leal
 John Xiong
+Gurmanpreet Saran
+
+Our project is a 2D pixel Metroidvania game. 
