@@ -1,40 +1,119 @@
 using Godot;
-using System;
 
+// Player controller for our side-scrolling 2D Metroidvania.
+// The file and C# class names must match for Godot C#.
 public partial class Node2d : CharacterBody2D
 {
-	public const float Speed = 300.0f;
-	public const float JumpVelocity = -400.0f;
+    // Exported values can be adjusted in the Inspector without editing the script.
+    [Export] public float MoveSpeed = 230.0f;
+    [Export] public float Acceleration = 1800.0f;
+    [Export] public float Friction = 1700.0f;
+    [Export] public float JumpVelocity = -470.0f;
 
-	public override void _PhysicsProcess(double delta)
-	{
-		Vector2 velocity = Velocity;
+    // AnimatedSprite2D is a child of the Player node in node_2d.tscn.
+    private AnimatedSprite2D _sprite;
+    private Vector2 _spawnPosition;
 
-		// Add the gravity.
-		if (!IsOnFloor())
-		{
-			velocity += GetGravity() * (float)delta;
-		}
+    // Track previous contact states so the debugger does not print every frame.
+    private bool _wasOnFloor;
+    private bool _wasOnWall;
 
-		// Handle Jump.
-		if (Input.IsActionJustPressed("ui_accept") && IsOnFloor())
-		{
-			velocity.Y = JumpVelocity;
-		}
+    public override void _Ready()
+    {
+        _sprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+        _spawnPosition = GlobalPosition;
+        _sprite.Play("idle");
+    }
 
-		// Get the input direction and handle the movement/deceleration.
-		// As good practice, you should replace UI actions with custom gameplay actions.
-		Vector2 direction = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
-		if (direction != Vector2.Zero)
-		{
-			velocity.X = direction.X * Speed;
-		}
-		else
-		{
-			velocity.X = Mathf.MoveToward(Velocity.X, 0, Speed);
-		}
+    // Physics updates are the correct place for CharacterBody2D movement.
+    public override void _PhysicsProcess(double delta)
+    {
+        float seconds = (float)delta;
+        Vector2 velocity = Velocity;
 
-		Velocity = velocity;
-		MoveAndSlide();
-	}
+        // 1. Apply gravity whenever the player is not standing on a surface.
+        if (!IsOnFloor())
+            velocity += GetGravity() * seconds;
+
+        // 2. Jump only when the player is on the floor.
+        if (Input.IsActionJustPressed("jump") && IsOnFloor())
+            velocity.Y = JumpVelocity;
+
+        // 3. Read left/right actions (-1 for left, +1 for right).
+        float horizontalInput = Input.GetAxis("move_left", "move_right");
+
+        // 4. Accelerate toward the desired speed, or slow down when released.
+        if (!Mathf.IsZeroApprox(horizontalInput))
+        {
+            velocity.X = Mathf.MoveToward(
+                velocity.X, horizontalInput * MoveSpeed, Acceleration * seconds);
+
+            // Face the direction of movement without changing the collision shape.
+            _sprite.FlipH = horizontalInput < 0.0f;
+        }
+        else
+        {
+            velocity.X = Mathf.MoveToward(velocity.X, 0.0f, Friction * seconds);
+        }
+
+        // 5. Commit movement and slide along physical walls/floors/platforms.
+        Velocity = velocity;
+        MoveAndSlide();
+
+        // 6. Choose the appropriate animation AFTER movement updates floor state.
+        UpdateAnimation();
+
+        // 7. Show first-contact messages for easier collision debugging.
+        ReportSolidCollisions();
+    }
+
+    private void UpdateAnimation()
+    {
+        string animation;
+
+        // Airborne states take priority over standing/running animations.
+        if (!IsOnFloor())
+            animation = Velocity.Y < 0.0f ? "jump" : "fall";
+        else if (Mathf.Abs(Velocity.X) > 5.0f)
+            animation = "walk";
+        else
+            animation = "idle";
+
+        // Only change animation when the state changes; otherwise it restarts.
+        if (_sprite.Animation != animation || !_sprite.IsPlaying())
+            _sprite.Play(animation);
+    }
+
+    private void ReportSolidCollisions()
+    {
+        if (IsOnFloor() && !_wasOnFloor)
+            GD.Print("Player landed on a solid surface.");
+
+        if (IsOnWall() && !_wasOnWall)
+        {
+            // MoveAndSlide may produce several contacts; inspect all of them.
+            for (int i = 0; i < GetSlideCollisionCount(); i++)
+            {
+                KinematicCollision2D contact = GetSlideCollision(i);
+                if (contact.GetCollider() is Node collider)
+                {
+                    GD.Print("Player collided with: ", collider.Name);
+                    break;
+                }
+            }
+        }
+
+        _wasOnFloor = IsOnFloor();
+        _wasOnWall = IsOnWall();
+    }
+
+    // Called by a hazard (Area2D) when the player touches it.
+    public void Respawn()
+    {
+        GD.Print("Hazard detected: returning player to the starting point.");
+        GlobalPosition = _spawnPosition;
+        Velocity = Vector2.Zero;
+        _wasOnFloor = false;
+        _wasOnWall = false;
+    }
 }
