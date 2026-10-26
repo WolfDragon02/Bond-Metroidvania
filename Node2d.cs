@@ -1,5 +1,5 @@
 using Godot;
-
+// Be sure to create multiple C# classes for PLayer.
 // Player controller for our side-scrolling 2D Metroidvania.
 // The file and C# class names must match for Godot C#.
 public partial class Node2d : CharacterBody2D
