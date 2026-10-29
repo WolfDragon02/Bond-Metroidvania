@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://wfi2svg88y1a" path="res://C#Scripts/Player/Player.cs" id="1_kne1u"]
 [ext_resource type="Texture2D" uid="uid://ypfyufu3pwt7" path="res://PlayerCharacterAssets/playerGrey_walk1.png" id="2_e80uo"]
 [ext_resource type="Texture2D" uid="uid://c3a3n7gjwpdcn" path="res://PlayerCharacterAssets/playerGrey_walk2.png" id="3_cxr5p"]
+[ext_resource type="Script" uid="uid://dgmbovmjsj7gl" path="res://C#Scripts/Components/HealthComponent.cs" id="4_e80uo"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_j41mj"]
 animations = [{
@@ -33,3 +34,6 @@ animation = &"walk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1530706134]
 shape = SubResource("CapsuleShape2D_j41mj")
+
+[node name="HealthComponent" type="Node" parent="." unique_id=868006052]
+script = ExtResource("4_e80uo")
