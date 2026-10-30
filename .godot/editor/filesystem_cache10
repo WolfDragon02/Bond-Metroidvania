@@ -1,0 +1,9 @@
+78098b89c88a74ebe8c20117b8754620
+::res://::1793039821
+icon.svg::CompressedTexture2D::1292712367104686992::1793039772::1793039823::1::::<><><>0<>0<>ff2d6c4b419dda72660f12468ab5d762<>res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex::
+Node2d.cs::CSharpScript::1555011379363807852::1793039772::0::1::::<><><>0<>0<><>::
+node_2d.tscn::PackedScene::1288498972130174692::1793039772::0::1::::<><><>0<>0<><>::uid://ypfyufu3pwt7::::res://PlayerCharacterAssets/playerGrey_walk1.png<>uid://wfi2svg88y1a::::res://Node2d.cs<>uid://c3a3n7gjwpdcn::::res://PlayerCharacterAssets/playerGrey_walk2.png
+README.md::TextFile::-1::1793039772::0::1::::<><><>0<>0<><>::
+::res://PlayerCharacterAssets/::1793039772
+playerGrey_walk1.png::CompressedTexture2D::1715845416778990198::1793039772::1793039823::1::::<><><>0<>0<>96b29be6fa5918f9f8e42a39e96f92fc<>res://.godot/imported/playerGrey_walk1.png-8854da4f7f9f92087f0c191ce77fdfd3.ctex::
+playerGrey_walk2.png::CompressedTexture2D::6739853970824275925::1793039772::1793039823::1::::<><><>0<>0<>5c71a7a2bbe10306647534a5a4c433f8<>res://.godot/imported/playerGrey_walk2.png-57b830d6e72b91fed5a14559babe81da.ctex::

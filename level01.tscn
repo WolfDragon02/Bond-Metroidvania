@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://drvd43i0eek4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ghrau"]
+size = Vector2(1000, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ybggs"]
+size = Vector2(300, 32)
+
+[node name="Level" type="Node2D" unique_id=357643842]
+
+[node name="Floor" type="StaticBody2D" parent="." unique_id=1875079203]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor" unique_id=1696438127]
+position = Vector2(258, 716)
+shape = SubResource("RectangleShape2D_ghrau")
+
+[node name="Floor2" type="StaticBody2D" parent="." unique_id=1109022939]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor2" unique_id=1257707964]
+position = Vector2(1244, 649)
+shape = SubResource("RectangleShape2D_ghrau")
+
+[node name="Platform" type="StaticBody2D" parent="." unique_id=1190522656]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform" unique_id=1542839237]
+position = Vector2(500, 435)
+shape = SubResource("RectangleShape2D_ybggs")
