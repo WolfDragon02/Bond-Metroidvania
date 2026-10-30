@@ -1,0 +1,53 @@
+[gd_scene format=3 uid="uid://smfnivpcjxhs"]
+
+[ext_resource type="Script" uid="uid://wfi2svg88y1a" path="res://C#Scripts/Player/PlayerController.cs" id="1_kne1u"]
+[ext_resource type="Texture2D" uid="uid://ypfyufu3pwt7" path="res://PlayerCharacterAssets/playerGrey_walk1.png" id="2_e80uo"]
+[ext_resource type="Texture2D" uid="uid://c3a3n7gjwpdcn" path="res://PlayerCharacterAssets/playerGrey_walk2.png" id="3_cxr5p"]
+[ext_resource type="Script" uid="uid://dgmbovmjsj7gl" path="res://C#Scripts/Components/HealthComponent.cs" id="4_e80uo"]
+[ext_resource type="Script" uid="uid://diyapm2eda4h7" path="res://C#Scripts/Player/PlayerMovement.cs" id="5_cxr5p"]
+[ext_resource type="Script" uid="uid://cbrr1wd3wwfvc" path="res://C#Scripts/Player/PlayerHealth.cs" id="6_tdg3f"]
+[ext_resource type="Script" uid="uid://bj6qnigfowhw" path="res://C#Scripts/Player/PlayerAnimation.cs" id="7_dtqjt"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_j41mj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_e80uo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_cxr5p")
+}],
+"loop": 1,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_j41mj"]
+radius = 27.0
+height = 66.0
+
+[node name="Player" type="CharacterBody2D" unique_id=1022889517]
+script = ExtResource("1_kne1u")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=488772928]
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_j41mj")
+animation = &"walk"
+frame = 1
+frame_progress = 0.16989216
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1530706134]
+shape = SubResource("CapsuleShape2D_j41mj")
+
+[node name="HealthComponent" type="Node" parent="." unique_id=868006052]
+script = ExtResource("4_e80uo")
+
+[node name="PlayerMovement" type="Node" parent="." unique_id=687107526]
+script = ExtResource("5_cxr5p")
+
+[node name="PlayerHealth" type="Node" parent="." unique_id=495778500]
+script = ExtResource("6_tdg3f")
+
+[node name="PlayerAnimation" type="Node" parent="." unique_id=259529701]
+script = ExtResource("7_dtqjt")
