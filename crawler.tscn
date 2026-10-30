@@ -1,0 +1,21 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://Crawler.cs" id="1_crawler"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_crawler"]
+size = Vector2(40, 24)
+
+[node name="Crawler" type="CharacterBody2D" node_paths=PackedStringArray("LedgeCheck")]
+script = ExtResource("1_crawler")
+LedgeCheck = NodePath("LedgeCheck")
+
+[node name="Body" type="Polygon2D" parent="."]
+color = Color(0.8, 0.25, 0.25, 1)
+polygon = PackedVector2Array(-20, -12, 20, -12, 20, 12, -20, 12)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_crawler")
+
+[node name="LedgeCheck" type="RayCast2D" parent="."]
+position = Vector2(22, 0)
+target_position = Vector2(0, 24)
