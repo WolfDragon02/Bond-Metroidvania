@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://dgmbovmjsj7gl" path="res://C#Scripts/Components/HealthComponent.cs" id="4_e80uo"]
 [ext_resource type="Script" uid="uid://diyapm2eda4h7" path="res://C#Scripts/Player/PlayerMovement.cs" id="5_cxr5p"]
 [ext_resource type="Script" uid="uid://cbrr1wd3wwfvc" path="res://C#Scripts/Player/PlayerHealth.cs" id="6_tdg3f"]
+[ext_resource type="Script" uid="uid://bj6qnigfowhw" path="res://C#Scripts/Player/PlayerAnimation.cs" id="7_dtqjt"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_j41mj"]
 animations = [{
@@ -23,7 +24,7 @@ animations = [{
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_j41mj"]
 radius = 27.0
-height = 68.0
+height = 66.0
 
 [node name="Player" type="CharacterBody2D" unique_id=1022889517]
 script = ExtResource("1_kne1u")
@@ -33,6 +34,8 @@ metadata/_edit_group_ = true
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_j41mj")
 animation = &"walk"
+frame = 1
+frame_progress = 0.16989216
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1530706134]
 shape = SubResource("CapsuleShape2D_j41mj")
@@ -45,3 +48,6 @@ script = ExtResource("5_cxr5p")
 
 [node name="PlayerHealth" type="Node" parent="." unique_id=495778500]
 script = ExtResource("6_tdg3f")
+
+[node name="PlayerAnimation" type="Node" parent="." unique_id=259529701]
+script = ExtResource("7_dtqjt")
