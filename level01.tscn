@@ -1,7 +1,11 @@
 [gd_scene format=3 uid="uid://drvd43i0eek4"]
 
+[ext_resource type="Texture2D" uid="uid://0k6ujrr6yegg" path="res://LevelAssets/GrassFloor1.png" id="1_242oy"]
+[ext_resource type="PackedScene" uid="uid://smfnivpcjxhs" path="res://Player.tscn" id="2_oy1tr"]
+[ext_resource type="Texture2D" uid="uid://sdub58bmsoer" path="res://LevelAssets/GrassFloor2.png" id="2_ucm2n"]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ghrau"]
-size = Vector2(1000, 64)
+size = Vector2(495, 42)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ybggs"]
 size = Vector2(300, 32)
@@ -11,17 +15,36 @@ size = Vector2(300, 32)
 [node name="Floor" type="StaticBody2D" parent="." unique_id=1875079203]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floor" unique_id=1696438127]
-position = Vector2(258, 716)
+position = Vector2(235, 692)
 shape = SubResource("RectangleShape2D_ghrau")
+
+[node name="Sprite2D" type="Sprite2D" parent="Floor" unique_id=1689580524]
+position = Vector2(230.99998, 637)
+scale = Vector2(7.8437505, 2.203125)
+texture = ExtResource("1_242oy")
 
 [node name="Floor2" type="StaticBody2D" parent="." unique_id=1109022939]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floor2" unique_id=1257707964]
-position = Vector2(1244, 649)
+position = Vector2(722, 650)
 shape = SubResource("RectangleShape2D_ghrau")
 
+[node name="Sprite2D" type="Sprite2D" parent="Floor2" unique_id=1196258591]
+position = Vector2(719, 582)
+scale = Vector2(7.835939, 2.8359373)
+texture = ExtResource("1_242oy")
+
 [node name="Platform" type="StaticBody2D" parent="." unique_id=1190522656]
+position = Vector2(0, -3)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Platform" unique_id=1542839237]
-position = Vector2(500, 435)
+position = Vector2(751, 537)
 shape = SubResource("RectangleShape2D_ybggs")
+
+[node name="Sprite2D" type="Sprite2D" parent="Platform" unique_id=525837449]
+position = Vector2(753, 484.5)
+scale = Vector2(4.75, 2.234375)
+texture = ExtResource("2_ucm2n")
+
+[node name="Player" parent="." unique_id=1022889517 instance=ExtResource("2_oy1tr")]
+position = Vector2(119, 629)
