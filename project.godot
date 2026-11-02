@@ -11,13 +11,16 @@ config_version=5
 [application]
 
 config/name="Bond"
+run/main_scene="uid://drvd43i0eek4"
 config/features=PackedStringArray("4.7", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
 [display]
 
-window/size/viewport_width=480
+window/size/viewport_width=1280
 window/size/viewport_height=720
+window/size/window_width_override=1280
+window/size/window_height_override=720
 window/stretch/mode="canvas_items"
 
 [dotnet]
@@ -53,4 +56,5 @@ test_damage={
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=3
 rendering_device/driver.windows="d3d12"
