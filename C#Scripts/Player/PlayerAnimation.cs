@@ -31,11 +31,8 @@ public partial class PlayerAnimation : Node
         }
         else
         {
-            // Stop the walking animation.
-            _sprite.Stop();
-
-            // Display the first frame while standing still.
-            _sprite.Frame = 0;
+            // Play idle animation when standing still.
+            PlayAnimation("idle");
         }
     }
 
