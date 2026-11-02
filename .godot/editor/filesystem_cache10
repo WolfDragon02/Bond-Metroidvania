@@ -1,0 +1,15 @@
+78098b89c88a74ebe8c20117b8754620
+::res://::1793646354
+icon - Copy.svg::CompressedTexture2D::6535617934921350774::1793129269::1793129270::1::::<><><>0<>0<>4db7172174bc8adf38346f830f21e7c4<>res://.godot/imported/icon - Copy.svg-c482a5194214f861ab50134801848a6d.ctex::
+pixely[1].ttf::FontFile::2415531760947343860::1793126501::1793126502::1::::<><><>0<>0<>b499dc528701b0130a90198975a34a9d<>res://.godot/imported/pixely[1].ttf-f74157856fedb783a3e16c82bceea3ed.fontdata::
+pixel_perfect-mobile-video-game-vector-background-4406706_640.png::CompressedTexture2D::1868869078343295537::1793129381::1793129382::1::::<><><>0<>0<>b15810d9a25719d3cfbd478145cb20b5<>res://.godot/imported/pixel_perfect-mobile-video-game-vector-background-4406706_640.png-5088f1b5b4956ed4848f89b71561c1d6.ctex::
+README.md::TextFile::-1::1793039161::0::1::::<><><>0<>0<><>::
+::res://MainMenu/::1793384841
+main_menu.gd::GDScript::2579782266576887944::1793226476::0::1::::<>Control<><>0<>0<><>::
+Main_Menu.tscn::PackedScene::4659755886874184738::1793384818::0::1::::<><><>0<>0<><>::uid://bc0wvwnoiktoq::::res://MainMenu/main_menu.gd<>uid://1vkaa1sgtofx::::res://pixel_perfect-mobile-video-game-vector-background-4406706_640.png<>uid://baodpqg0ydy4c::::res://pixely[1].ttf
+::res://PauseMenu/::1793386308
+Pause Menu.gdshader::Shader::6935951000067345072::1793384018::0::1::::<><><>0<>0<><>::
+Pause Menu.tscn::PackedScene::8361907926325052661::1793386308::0::1::::<><><>0<>0<><>::uid://drbqud8ojplx0::::res://PauseMenu/pause_menu.gd<>uid://c523dnfkos7ng::::res://PauseMenu/Pause Menu.gdshader<>uid://baodpqg0ydy4c::::res://pixely[1].ttf
+pause_menu.gd::GDScript::8355544167639597019::1793385252::0::1::::<>Control<><>0<>0<><>::
+::res://PlaceholderScene/::1793385257
+PlaceHolder.tscn::PackedScene::2129300067345165202::1793385257::0::1::::<><><>0<>0<><>::uid://dretnwstmdusj::::res://PauseMenu/Pause Menu.tscn
