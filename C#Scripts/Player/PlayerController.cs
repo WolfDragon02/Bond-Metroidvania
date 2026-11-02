@@ -8,6 +8,9 @@ public partial class PlayerController : Entity
     private PlayerMovement _movement = null!;
     private PlayerHealth _playerHealth = null!;
 
+    // NEW: Reference to the player's animation module.
+    private PlayerAnimation _playerAnimation = null!;
+
     public override void _Ready()
     {
         // Initialize shared Entity functionality.
@@ -16,12 +19,18 @@ public partial class PlayerController : Entity
         // Connect the player modules.
         _movement = GetNode<PlayerMovement>("PlayerMovement");
         _playerHealth = GetNode<PlayerHealth>("PlayerHealth");
+
+        // NEW: Find the PlayerAnimation node.
+        _playerAnimation = GetNode<PlayerAnimation>("PlayerAnimation");
     }
 
     // Update movement every physics frame.
     public override void _PhysicsProcess(double delta)
     {
         _movement.UpdateMovement(this, delta);
+
+        // NEW: Update animation based on the player's velocity.
+        _playerAnimation.UpdateAnimation(this);
     }
 
     // Temporary input for testing the health system.
