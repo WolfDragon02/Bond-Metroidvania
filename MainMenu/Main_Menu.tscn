@@ -1,0 +1,114 @@
+[gd_scene format=3 uid="uid://b7nhq7pit7vc1"]
+
+[ext_resource type="Script" uid="uid://cxrkrr283m5eg" path="res://C#Scripts/ForMainMenu/Main_Menu.cs" id="2_4rnly"]
+[ext_resource type="Texture2D" uid="uid://1vkaa1sgtofx" path="res://MainMenu/pixel_perfect-mobile-video-game-vector-background-4406706_640.png" id="2_wlfof"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_l5heq"]
+texture = ExtResource("2_wlfof")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ujtin"]
+bg_color = Color(0.004019165, 0.004019165, 0.004019165, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[node name="MainMenu" type="Control" unique_id=687106174]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 4.0
+offset_right = 2.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_4rnly")
+
+[node name="Panel" type="Panel" parent="." unique_id=550371370]
+layout_mode = 0
+offset_right = 1284.0
+offset_bottom = 721.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_l5heq")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1118070474]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -143.125
+offset_top = -77.0
+offset_right = 143.125
+offset_bottom = 124.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 7
+
+[node name="Button" type="Button" parent="VBoxContainer" unique_id=199907818]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(16.559696, 16.562132, 16.56173, 1)
+theme_override_colors/font_focus_color = Color(0.5616474, 0.05022537, 0.038295135, 1)
+theme_override_colors/font_pressed_color = Color(1, 0.03529412, 0, 1)
+theme_override_colors/font_hover_color = Color(0.6175885, 0, 0, 1)
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_ujtin")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ujtin")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ujtin")
+text = "Start Game"
+script = ExtResource("2_4rnly")
+
+[node name="Button2" type="Button" parent="VBoxContainer" unique_id=2072584866]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(16.559696, 16.562132, 16.56173, 1)
+theme_override_colors/font_focus_color = Color(0.5616474, 0.05022537, 0.038295135, 1)
+theme_override_colors/font_pressed_color = Color(1, 0.03529412, 0, 1)
+theme_override_colors/font_hover_color = Color(0.6175885, 0, 0, 1)
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_ujtin")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ujtin")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ujtin")
+text = "Options"
+script = ExtResource("2_4rnly")
+
+[node name="Button3" type="Button" parent="VBoxContainer" unique_id=87538216]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(16.559696, 16.562132, 16.56173, 1)
+theme_override_colors/font_focus_color = Color(0.5616474, 0.05022537, 0.038295135, 1)
+theme_override_colors/font_pressed_color = Color(1, 0.03529412, 0, 1)
+theme_override_colors/font_hover_color = Color(0.6175885, 0, 0, 1)
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_ujtin")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ujtin")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ujtin")
+text = "Quit Game"
+script = ExtResource("2_4rnly")
+
+[node name="Label" type="Label" parent="." unique_id=1858269841]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -181.5
+offset_top = -239.0
+offset_right = 181.5
+offset_bottom = -38.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_y = 5
+theme_override_font_sizes/font_size = 30
+text = "Familiar Game"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="VBoxContainer/Button" to="." method="OnStartPressed"]
+[connection signal="pressed" from="VBoxContainer/Button2" to="." method="OnOptionsPressed"]
+[connection signal="pressed" from="VBoxContainer/Button3" to="." method="OnQuitGame"]
