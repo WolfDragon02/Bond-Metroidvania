@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://0k6ujrr6yegg" path="res://LevelAssets/GrassFloor1.png" id="1_242oy"]
 [ext_resource type="PackedScene" uid="uid://smfnivpcjxhs" path="res://Player.tscn" id="2_oy1tr"]
 [ext_resource type="Texture2D" uid="uid://sdub58bmsoer" path="res://LevelAssets/GrassFloor2.png" id="2_ucm2n"]
+[ext_resource type="PackedScene" uid="uid://dretnwstmdusj" path="res://PauseMenu/Pause Menu.tscn" id="4_ucm2n"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ghrau"]
 size = Vector2(495, 42)
@@ -48,3 +49,7 @@ texture = ExtResource("2_ucm2n")
 
 [node name="Player" parent="." unique_id=1022889517 instance=ExtResource("2_oy1tr")]
 position = Vector2(119, 629)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1091048312]
+
+[node name="PauseMenu" parent="CanvasLayer" unique_id=595725861 instance=ExtResource("4_ucm2n")]
