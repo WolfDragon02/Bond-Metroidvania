@@ -49,6 +49,7 @@ texture = ExtResource("2_ucm2n")
 
 [node name="Player" parent="." unique_id=1022889517 instance=ExtResource("2_oy1tr")]
 position = Vector2(119, 629)
+MovementSpeed = 250.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1091048312]
 
