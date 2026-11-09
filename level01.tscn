@@ -5,6 +5,8 @@
 [ext_resource type="Texture2D" uid="uid://sdub58bmsoer" path="res://LevelAssets/GrassFloor2.png" id="2_ucm2n"]
 [ext_resource type="PackedScene" uid="uid://48ovpkom2b52" path="res://Familiar.tscn" id="4_ogl2o"]
 [ext_resource type="PackedScene" uid="uid://dretnwstmdusj" path="res://PauseMenu/Pause Menu.tscn" id="4_ucm2n"]
+[ext_resource type="PackedScene" path="res://Scenes/Enemies/Crawler.tscn" id="5_crawler"]
+[ext_resource type="PackedScene" path="res://Scenes/Enemies/Charger.tscn" id="6_charger"]
 [ext_resource type="Script" uid="uid://bikafsp3htduo" path="res://C#Scripts/Familiar/FamiliarMain.cs" id="5_k2kcu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ghrau"]
@@ -53,6 +55,11 @@ texture = ExtResource("2_ucm2n")
 position = Vector2(119, 629)
 MovementSpeed = 250.0
 
+[node name="Crawler" parent="." instance=ExtResource("5_crawler")]
+position = Vector2(820, 617)
+
+[node name="Charger" parent="." instance=ExtResource("6_charger")]
+position = Vector2(751, 503)
 [node name="Familiar" parent="." unique_id=1671126897 instance=ExtResource("4_ogl2o")]
 position = Vector2(75, 612)
 script = ExtResource("5_k2kcu")
