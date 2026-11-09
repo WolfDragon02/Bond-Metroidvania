@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://diyapm2eda4h7" path="res://C#Scripts/Player/PlayerMovement.cs" id="5_cxr5p"]
 [ext_resource type="Script" uid="uid://cbrr1wd3wwfvc" path="res://C#Scripts/Player/PlayerHealth.cs" id="6_tdg3f"]
 [ext_resource type="Script" uid="uid://bj6qnigfowhw" path="res://C#Scripts/Player/PlayerAnimation.cs" id="7_dtqjt"]
+[ext_resource type="Script" uid="uid://dew7x0cmvwnpf" path="res://C#Scripts/Player/PlayerCombat.cs" id="8_5ncpa"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_j41mj"]
 animations = [{
@@ -51,3 +52,6 @@ script = ExtResource("6_tdg3f")
 
 [node name="PlayerAnimation" type="Node" parent="." unique_id=259529701]
 script = ExtResource("7_dtqjt")
+
+[node name="PlayerCombat" type="Node" parent="." unique_id=2069046609]
+script = ExtResource("8_5ncpa")
