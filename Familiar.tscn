@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://48ovpkom2b52"]
+
+[ext_resource type="Texture2D" uid="uid://be1uj3jtvdlqv" path="res://C#Scripts/Familiar/AdultWhiteDragon.png" id="2_sbv43"]
+[ext_resource type="Script" uid="uid://bkrmhtet7ubpf" path="res://C#Scripts/Familiar/FamiliarMovement.cs" id="3_sbv43"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w1roa"]
+atlas = ExtResource("2_sbv43")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ndf2b"]
+atlas = ExtResource("2_sbv43")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ut37e"]
+atlas = ExtResource("2_sbv43")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t6due"]
+atlas = ExtResource("2_sbv43")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_13wyf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w1roa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ndf2b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ut37e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t6due")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 2.0
+}]
+
+[node name="Familiar" type="CharacterBody2D" unique_id=1671126897]
+motion_mode = 1
+script = ExtResource("3_sbv43")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1553935110]
+sprite_frames = SubResource("SpriteFrames_13wyf")
+autoplay = "default"
+frame = 2
+frame_progress = 0.23956655
+
+[node name="FamiliarMovement" type="Node" parent="." unique_id=807084452]
+script = ExtResource("3_sbv43")
+FollowSpeed = 200.0
+StopDistance = 100.0
