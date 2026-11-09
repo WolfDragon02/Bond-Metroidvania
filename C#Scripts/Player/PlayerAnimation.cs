@@ -26,6 +26,7 @@ public partial class PlayerAnimation : Node
 			// Assumes the original sprite faces right.
 			_sprite.FlipH = direction < 0;
 
+<<<<<<< Updated upstream
 			// Play walking animation.
 			PlayAnimation("walk");
 		}
@@ -38,6 +39,21 @@ public partial class PlayerAnimation : Node
 			_sprite.Frame = 0;
 		}
 	}
+=======
+            // Play walking animation.
+            PlayAnimation("Walk");
+        }
+        else
+        {
+            // Stop the walking animation.
+            //_sprite.Stop();
+
+            // Display the first frame while standing still.
+            //_sprite.Frame = 0;
+            PlayAnimation("Idle");
+        }
+    }
+>>>>>>> Stashed changes
 
 	// Avoid restarting the same animation every frame.
 	private void PlayAnimation(string animationName)
