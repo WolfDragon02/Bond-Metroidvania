@@ -1,0 +1,139 @@
+[gd_scene format=3 uid="uid://becopy65pdw8"]
+
+[ext_resource type="PackedScene" uid="uid://smfnivpcjxhs" path="res://Player.tscn" id="1_y1jsw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ground"]
+size = Vector2(1152, 88)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wall"]
+size = Vector2(40, 648)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_platform"]
+size = Vector2(220, 24)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_short_platform"]
+size = Vector2(180, 24)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dummy"]
+size = Vector2(40, 68)
+
+[node name="TestLevel" type="Node2D" unique_id=850740028]
+
+[node name="Background" type="Polygon2D" parent="." unique_id=1492436494]
+color = Color(0.071, 0.094, 0.145, 1)
+polygon = PackedVector2Array(0, 0, 1152, 0, 1152, 648, 0, 648)
+
+[node name="BackWallStripe" type="Polygon2D" parent="." unique_id=1147595663]
+color = Color(0.098, 0.141, 0.204, 1)
+polygon = PackedVector2Array(0, 538, 1152, 538, 1152, 560, 0, 560)
+
+[node name="Ground" type="StaticBody2D" parent="." unique_id=1783681054]
+position = Vector2(576, 604)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground" unique_id=339371310]
+shape = SubResource("RectangleShape2D_ground")
+
+[node name="Visual" type="Polygon2D" parent="Ground" unique_id=694459452]
+color = Color(0.273, 0.35, 0.438, 1)
+polygon = PackedVector2Array(-576, -44, 576, -44, 576, 44, -576, 44)
+
+[node name="TopLine" type="Polygon2D" parent="Ground" unique_id=142073719]
+color = Color(0.43, 0.7, 0.66, 1)
+polygon = PackedVector2Array(-576, -44, 576, -44, 576, -38, -576, -38)
+
+[node name="LeftWall" type="StaticBody2D" parent="." unique_id=1924117466]
+position = Vector2(20, 324)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall" unique_id=928665717]
+shape = SubResource("RectangleShape2D_wall")
+
+[node name="Visual" type="Polygon2D" parent="LeftWall" unique_id=769516440]
+color = Color(0.22, 0.29, 0.38, 1)
+polygon = PackedVector2Array(-20, -324, 20, -324, 20, 324, -20, 324)
+
+[node name="RightWall" type="StaticBody2D" parent="." unique_id=47196017]
+position = Vector2(1132, 324)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightWall" unique_id=257592080]
+shape = SubResource("RectangleShape2D_wall")
+
+[node name="Visual" type="Polygon2D" parent="RightWall" unique_id=1406227393]
+color = Color(0.22, 0.29, 0.38, 1)
+polygon = PackedVector2Array(-20, -324, 20, -324, 20, 324, -20, 324)
+
+[node name="Platform1" type="StaticBody2D" parent="." unique_id=1634468865]
+position = Vector2(325, 495)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform1" unique_id=724348664]
+shape = SubResource("RectangleShape2D_platform")
+
+[node name="Visual" type="Polygon2D" parent="Platform1" unique_id=1117188249]
+color = Color(0.28, 0.59, 0.59, 1)
+polygon = PackedVector2Array(-110, -12, 110, -12, 110, 12, -110, 12)
+
+[node name="Platform2" type="StaticBody2D" parent="." unique_id=1963743902]
+position = Vector2(570, 425)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform2" unique_id=876536618]
+shape = SubResource("RectangleShape2D_short_platform")
+
+[node name="Visual" type="Polygon2D" parent="Platform2" unique_id=1960504533]
+color = Color(0.28, 0.59, 0.59, 1)
+polygon = PackedVector2Array(-90, -12, 90, -12, 90, 12, -90, 12)
+
+[node name="Platform3" type="StaticBody2D" parent="." unique_id=1582554470]
+position = Vector2(815, 355)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform3" unique_id=774460186]
+shape = SubResource("RectangleShape2D_short_platform")
+
+[node name="Visual" type="Polygon2D" parent="Platform3" unique_id=762913685]
+color = Color(0.28, 0.59, 0.59, 1)
+polygon = PackedVector2Array(-90, -12, 90, -12, 90, 12, -90, 12)
+
+[node name="PlayerSpawn" type="Marker2D" parent="." unique_id=1801948136]
+position = Vector2(120, 526)
+
+[node name="PracticeDummy" type="StaticBody2D" parent="." unique_id=689458250]
+position = Vector2(1010, 526)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PracticeDummy" unique_id=127551949]
+shape = SubResource("RectangleShape2D_dummy")
+
+[node name="Visual" type="Polygon2D" parent="PracticeDummy" unique_id=74393231]
+color = Color(0.85, 0.36, 0.32, 1)
+polygon = PackedVector2Array(-20, -34, 20, -34, 20, 34, -20, 34)
+
+[node name="CenterStripe" type="Polygon2D" parent="PracticeDummy" unique_id=2043048398]
+color = Color(1, 0.78, 0.5, 1)
+polygon = PackedVector2Array(-20, -5, 20, -5, 20, 5, -20, 5)
+
+[node name="Hurtbox" type="Area2D" parent="PracticeDummy" unique_id=1722739807]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PracticeDummy/Hurtbox" unique_id=936137923]
+shape = SubResource("RectangleShape2D_dummy")
+
+[node name="DummyLabel" type="Label" parent="PracticeDummy" unique_id=1569381823]
+offset_left = -37.0
+offset_top = -68.0
+offset_right = 51.0
+offset_bottom = -40.0
+theme_override_colors/font_color = Color(1, 0.83, 0.68, 1)
+theme_override_font_sizes/font_size = 16
+text = "DUMMY"
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=1464650953]
+
+[node name="Title" type="Label" parent="HUD" unique_id=1849976653]
+offset_left = 62.0
+offset_top = 25.0
+offset_right = 560.0
+offset_bottom = 62.0
+theme_override_colors/font_color = Color(0.92, 0.95, 0.97, 1)
+theme_override_font_sizes/font_size = 20
+text = "TEST LEVEL  /  MOVE  -  JUMP  -  ATTACK"
+
+[node name="Player" parent="." unique_id=1022889517 instance=ExtResource("1_y1jsw")]
+position = Vector2(92, 487)
