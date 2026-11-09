@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://sdub58bmsoer" path="res://LevelAssets/GrassFloor2.png" id="2_ucm2n"]
 [ext_resource type="PackedScene" uid="uid://dretnwstmdusj" path="res://PauseMenu/Pause Menu.tscn" id="4_ucm2n"]
 [ext_resource type="PackedScene" path="res://Scenes/Enemies/Crawler.tscn" id="5_crawler"]
+[ext_resource type="PackedScene" path="res://Scenes/Enemies/Charger.tscn" id="6_charger"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ghrau"]
 size = Vector2(495, 42)
@@ -54,6 +55,9 @@ MovementSpeed = 250.0
 
 [node name="Crawler" parent="." instance=ExtResource("5_crawler")]
 position = Vector2(820, 617)
+
+[node name="Charger" parent="." instance=ExtResource("6_charger")]
+position = Vector2(751, 503)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1091048312]
 
