@@ -1,5 +1,9 @@
-CanvasLayer
-Sprite2D
+Node
 CollisionShape2D
+CollisionPolygon2D
+AnimatedSprite2D
+CharacterBody2D
+Sprite2D
+CanvasLayer
 StaticBody2D
 Node2D

@@ -3,7 +3,9 @@
 [ext_resource type="Texture2D" uid="uid://0k6ujrr6yegg" path="res://LevelAssets/GrassFloor1.png" id="1_242oy"]
 [ext_resource type="PackedScene" uid="uid://smfnivpcjxhs" path="res://Player.tscn" id="2_oy1tr"]
 [ext_resource type="Texture2D" uid="uid://sdub58bmsoer" path="res://LevelAssets/GrassFloor2.png" id="2_ucm2n"]
+[ext_resource type="PackedScene" uid="uid://48ovpkom2b52" path="res://Familiar.tscn" id="4_ogl2o"]
 [ext_resource type="PackedScene" uid="uid://dretnwstmdusj" path="res://PauseMenu/Pause Menu.tscn" id="4_ucm2n"]
+[ext_resource type="Script" uid="uid://bikafsp3htduo" path="res://C#Scripts/Familiar/FamiliarMain.cs" id="5_k2kcu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ghrau"]
 size = Vector2(495, 42)
@@ -49,7 +51,15 @@ texture = ExtResource("2_ucm2n")
 
 [node name="Player" parent="." unique_id=1022889517 instance=ExtResource("2_oy1tr")]
 position = Vector2(119, 629)
+MovementSpeed = 250.0
+
+[node name="Familiar" parent="." unique_id=1671126897 instance=ExtResource("4_ogl2o")]
+position = Vector2(75, 612)
+script = ExtResource("5_k2kcu")
+MovementSpeed = 100.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1091048312]
 
 [node name="PauseMenu" parent="CanvasLayer" unique_id=595725861 instance=ExtResource("4_ucm2n")]
+offset_top = 4.0
+offset_bottom = 4.0
