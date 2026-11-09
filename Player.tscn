@@ -225,7 +225,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_47wu6")
 }],
 "loop": 1,
-"name": &"Slash Attack",
+"name": &"Light_Attack",
 "speed": 12.0
 }, {
 "frames": [{
@@ -288,7 +288,7 @@ metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=488772928]
 sprite_frames = SubResource("SpriteFrames_j41mj")
-animation = &"Idle"
+animation = &"Light_Attack"
 autoplay = "Idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1530706134]
