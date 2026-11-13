@@ -8,8 +8,8 @@ public abstract partial class Entity : CharacterBody2D
 	[Export]
 	public float MovementSpeed { get; set; } = 100f;
 
-	// Reference to the HealthComponent child node.
-	protected HealthComponent? Health { get; private set; }
+    // Reference to the HealthComponent child node.
+    protected HealthComponent? Health { get; private set; }
 
 	public override void _Ready()
 	{
