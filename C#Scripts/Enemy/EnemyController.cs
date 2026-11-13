@@ -60,11 +60,13 @@ public partial class EnemyController : Entity
 			_sprite.AnimationFinished += OnAnimationFinished;
 		}
 
-		// Walk through the player instead of treating them as a wall.
-		// The enemy hurts the player with its ContactHitbox instead.
+		// The enemy and player pass through each other instead of acting
+		// as walls; the enemy hurts the player with its ContactHitbox.
+		// Both sides need the exception for it to work in both directions.
 		if (GetTree().GetFirstNodeInGroup("player") is PhysicsBody2D player)
 		{
 			AddCollisionExceptionWith(player);
+			player.AddCollisionExceptionWith(this);
 		}
 	}
 

@@ -23,7 +23,6 @@ size = Vector2(42, 26)
 colors = PackedColorArray(0.86, 0.76, 0.62, 0.9, 0.86, 0.76, 0.62, 0)
 
 [node name="Charger" type="CharacterBody2D"]
-collision_layer = 4
 script = ExtResource("1_controller")
 ContactDamage = 20
 MovementSpeed = 70.0
@@ -70,7 +69,7 @@ color_ramp = SubResource("Gradient_dust")
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("2_health")
-MaxHealth = 5
+MaxHealth = 40
 
 [node name="EnemyMovement" type="Node" parent="."]
 script = ExtResource("3_movement")

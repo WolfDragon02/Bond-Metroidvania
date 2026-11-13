@@ -19,7 +19,6 @@ size = Vector2(28, 14)
 size = Vector2(30, 16)
 
 [node name="Crawler" type="CharacterBody2D"]
-collision_layer = 4
 script = ExtResource("1_controller")
 ContactDamage = 10
 MovementSpeed = 80.0
@@ -48,7 +47,7 @@ shape = SubResource("RectangleShape2D_contact")
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("2_health")
-MaxHealth = 3
+MaxHealth = 20
 
 [node name="EnemyMovement" type="Node" parent="."]
 script = ExtResource("3_movement")
