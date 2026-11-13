@@ -5,7 +5,7 @@ public partial class FamiliarMovement : Node
 {
 	[Export] public Node2D Player { get; set; }
 
-	[Export] public float FollowSpeed;
+	[Export] public float FollowSpeed = 160f;
 
 	[Export] public float FollowDistance = 30f;
 
@@ -15,9 +15,15 @@ public partial class FamiliarMovement : Node
 
 	[Export] public float FloatSpeed = 3f;
 
+	[Export] public float GuideSpeed = 120f;
+
 	private AnimatedSprite2D _animatedSprite;
 	private float _time = 0f;
-	
+
+	private bool _isGuiding = false;
+	private Vector2 _guideTarget;
+
+
 	public override void _Ready() {
 		_animatedSprite = GetParent()
 			.GetNode<AnimatedSprite2D>("AnimatedSprite2D");
@@ -26,7 +32,7 @@ public partial class FamiliarMovement : Node
 		
 		Player = GetTree()
 			.GetFirstNodeInGroup("player") as Node2D;
-	if (Player == null)
+		if (Player == null)
 		{
 			GD.PrintErr("FAMILIAR: Player not found!");
 		}
@@ -35,6 +41,19 @@ public partial class FamiliarMovement : Node
 			GD.Print("FAMILIAR: Player detected!");
 		}
 	}
+	
+	public void SetGuideTarget(Vector2 position)
+	{
+		_guideTarget = position;
+		_isGuiding = true;
+	}
+	
+	
+	public void StopGuiding()
+	{
+		_isGuiding = false;
+	}
+	
 	public void FamMovement(Entity familiar, double delta) {
 		if (Player == null)
 			return;
