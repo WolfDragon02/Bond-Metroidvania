@@ -4,24 +4,69 @@
 [ext_resource type="Script" path="res://C#Scripts/Components/HealthComponent.cs" id="2_health"]
 [ext_resource type="Script" path="res://C#Scripts/Enemy/EnemyMovement.cs" id="3_movement"]
 [ext_resource type="Script" path="res://C#Scripts/Enemy/ChargerAI.cs" id="4_ai"]
+[ext_resource type="SpriteFrames" path="res://EnemyAssets/Charger/charger_frames.tres" id="5_frames"]
+[ext_resource type="Shader" path="res://EnemyAssets/enemy_flash.gdshader" id="6_flash"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_flash"]
+resource_local_to_scene = true
+shader = ExtResource("6_flash")
+shader_parameter/flash = 0.0
+shader_parameter/flash_color = Color(1, 1, 1, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_charger"]
-size = Vector2(48, 30)
+size = Vector2(40, 24)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_contact"]
+size = Vector2(42, 26)
+
+[sub_resource type="Gradient" id="Gradient_dust"]
+colors = PackedColorArray(0.86, 0.76, 0.62, 0.9, 0.86, 0.76, 0.62, 0)
 
 [node name="Charger" type="CharacterBody2D"]
+collision_layer = 4
 script = ExtResource("1_controller")
+ContactDamage = 20
 MovementSpeed = 70.0
 
-[node name="Body" type="Polygon2D" parent="."]
-color = Color(0.9, 0.5, 0.1, 1)
-polygon = PackedVector2Array(-24, -15, 14, -15, 24, 0, 14, 15, -24, 15)
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_flash")
+position = Vector2(0, -3)
+sprite_frames = ExtResource("5_frames")
+animation = &"walk"
+autoplay = "walk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 3)
 shape = SubResource("RectangleShape2D_charger")
 
 [node name="LedgeCheck" type="RayCast2D" parent="."]
-position = Vector2(26, 0)
-target_position = Vector2(0, 29)
+position = Vector2(22, 3)
+target_position = Vector2(0, 22)
+
+[node name="ContactHitbox" type="Area2D" parent="."]
+collision_layer = 0
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ContactHitbox"]
+position = Vector2(0, 3)
+shape = SubResource("RectangleShape2D_contact")
+
+[node name="Dust" type="CPUParticles2D" parent="."]
+position = Vector2(-16, 14)
+emitting = false
+amount = 18
+lifetime = 0.45
+local_coords = false
+emission_shape = 3
+emission_rect_extents = Vector2(4, 1)
+direction = Vector2(-1, -0.5)
+spread = 25.0
+gravity = Vector2(0, -30)
+initial_velocity_min = 20.0
+initial_velocity_max = 55.0
+scale_amount_min = 2.0
+scale_amount_max = 3.0
+color_ramp = SubResource("Gradient_dust")
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("2_health")

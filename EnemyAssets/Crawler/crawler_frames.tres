@@ -1,0 +1,57 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://EnemyAssets/Crawler/crawler_walk.png" id="1_walk"]
+[ext_resource type="Texture2D" path="res://EnemyAssets/Crawler/crawler_death.png" id="2_death"]
+
+[sub_resource type="AtlasTexture" id="walk_0"]
+atlas = ExtResource("1_walk")
+region = Rect2(0, 0, 40, 24)
+
+[sub_resource type="AtlasTexture" id="walk_1"]
+atlas = ExtResource("1_walk")
+region = Rect2(40, 0, 40, 24)
+
+[sub_resource type="AtlasTexture" id="walk_2"]
+atlas = ExtResource("1_walk")
+region = Rect2(80, 0, 40, 24)
+
+[sub_resource type="AtlasTexture" id="walk_3"]
+atlas = ExtResource("1_walk")
+region = Rect2(120, 0, 40, 24)
+
+[sub_resource type="AtlasTexture" id="death_0"]
+atlas = ExtResource("2_death")
+region = Rect2(0, 0, 40, 24)
+
+[sub_resource type="AtlasTexture" id="death_1"]
+atlas = ExtResource("2_death")
+region = Rect2(40, 0, 40, 24)
+
+[sub_resource type="AtlasTexture" id="death_2"]
+atlas = ExtResource("2_death")
+region = Rect2(80, 0, 40, 24)
+
+[sub_resource type="AtlasTexture" id="death_3"]
+atlas = ExtResource("2_death")
+region = Rect2(120, 0, 40, 24)
+
+[sub_resource type="AtlasTexture" id="death_4"]
+atlas = ExtResource("2_death")
+region = Rect2(160, 0, 40, 24)
+
+[sub_resource type="AtlasTexture" id="death_5"]
+atlas = ExtResource("2_death")
+region = Rect2(200, 0, 40, 24)
+
+[resource]
+animations = [{
+"frames": [{"duration": 1.0, "texture": SubResource("walk_0")}, {"duration": 1.0, "texture": SubResource("walk_1")}, {"duration": 1.0, "texture": SubResource("walk_2")}, {"duration": 1.0, "texture": SubResource("walk_3")}],
+"loop": true,
+"name": &"walk",
+"speed": 8.0
+}, {
+"frames": [{"duration": 1.0, "texture": SubResource("death_0")}, {"duration": 1.0, "texture": SubResource("death_1")}, {"duration": 1.0, "texture": SubResource("death_2")}, {"duration": 1.0, "texture": SubResource("death_3")}, {"duration": 1.0, "texture": SubResource("death_4")}, {"duration": 1.0, "texture": SubResource("death_5")}],
+"loop": false,
+"name": &"death",
+"speed": 12.0
+}]
