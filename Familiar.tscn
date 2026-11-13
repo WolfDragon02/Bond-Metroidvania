@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://be1uj3jtvdlqv" path="res://C#Scripts/Familiar/AdultWhiteDragon.png" id="2_sbv43"]
 [ext_resource type="Script" uid="uid://bkrmhtet7ubpf" path="res://C#Scripts/Familiar/FamiliarMovement.cs" id="3_sbv43"]
+[ext_resource type="Script" uid="uid://ddltdle05janr" path="res://C#Scripts/Familiar/FamiliarController.cs" id="3_w1roa"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_w1roa"]
 atlas = ExtResource("2_sbv43")
@@ -39,9 +40,13 @@ animations = [{
 "speed": 2.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_ujtin"]
+radius = 151.00331
+
 [node name="Familiar" type="CharacterBody2D" unique_id=1671126897]
 motion_mode = 1
 script = ExtResource("3_sbv43")
+FollowSpeed = 100.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1553935110]
 sprite_frames = SubResource("SpriteFrames_13wyf")
@@ -53,3 +58,19 @@ frame_progress = 0.23956655
 script = ExtResource("3_sbv43")
 FollowSpeed = 200.0
 StopDistance = 100.0
+
+[node name="FamiliarController" type="Node" parent="." unique_id=41036936 node_paths=PackedStringArray("DetectionArea", "AlertLabel")]
+script = ExtResource("3_w1roa")
+DetectionArea = NodePath("../DetectionArea")
+AlertLabel = NodePath("../AlertLabel")
+
+[node name="DetectionArea" type="Area2D" parent="." unique_id=748648967]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea" unique_id=538846005]
+shape = SubResource("CircleShape2D_ujtin")
+
+[node name="AlertLabel" type="Label" parent="." unique_id=1846793117]
+offset_left = -13.0
+offset_top = -29.0
+offset_right = 14.0
+offset_bottom = -6.0
