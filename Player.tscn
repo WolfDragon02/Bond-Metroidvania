@@ -392,13 +392,12 @@ script = ExtResource("7_dtqjt")
 [node name="PlayerCombat" type="Node" parent="." unique_id=2069046609]
 script = ExtResource("8_5ncpa")
 
-<<<<<<< Updated upstream
 [node name="Camera2D" type="Camera2D" parent="." unique_id=14092789]
 position_smoothing_enabled = true
-=======
+
 [node name="AttackHitbox" type="Area2D" parent="." unique_id=28386512]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackHitbox" unique_id=1704518849]
 position = Vector2(31.75, 4.5)
 shape = SubResource("RectangleShape2D_oudfo")
->>>>>>> Stashed changes
+
