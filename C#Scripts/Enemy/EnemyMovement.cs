@@ -9,7 +9,25 @@ public partial class EnemyMovement : Node
 	[Export]
 	public float Gravity = 980f;
 
+	// Scales MovementSpeed. An EnemyAI sets 0 to stand still
+	// or a larger value to charge.
+	public float SpeedMultiplier { get; set; } = 1f;
+
+	// When false the enemy no longer turns around at walls and
+	// ledges, so an EnemyAI can decide what to do there.
+	public bool TurnAtEdges { get; set; } = true;
+
 	// -1 walks left, 1 walks right.
+	public int Direction
+	{
+		get => _direction;
+		set
+		{
+			_direction = value < 0 ? -1 : 1;
+			ApplyDirection();
+		}
+	}
+
 	private int _direction = -1;
 
 	private RayCast2D _ledgeCheck = null!;
@@ -31,18 +49,25 @@ public partial class EnemyMovement : Node
 		{
 			velocity.Y += Gravity * (float)delta;
 		}
-		else if (enemy.IsOnWall() || !_ledgeCheck.IsColliding())
+		else if (TurnAtEdges && IsBlockedAhead(enemy))
 		{
 			// Turn around at a wall or the edge of a platform.
-			_direction = -_direction;
-			ApplyDirection();
+			Direction = -_direction;
 		}
 
 		// Use MovementSpeed from the Entity class.
-		velocity.X = _direction * enemy.MovementSpeed;
+		velocity.X = _direction * enemy.MovementSpeed * SpeedMultiplier;
 
 		enemy.Velocity = velocity;
 		enemy.MoveAndSlide();
+	}
+
+	// True when the enemy is on the floor and facing a wall
+	// or the edge of a platform.
+	public bool IsBlockedAhead(Entity enemy)
+	{
+		return enemy.IsOnFloor()
+			&& (enemy.IsOnWall() || !_ledgeCheck.IsColliding());
 	}
 
 	// Keep the ledge ray on the side the enemy is walking toward.

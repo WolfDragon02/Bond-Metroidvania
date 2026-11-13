@@ -1,0 +1,34 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://C#Scripts/Enemy/EnemyController.cs" id="1_controller"]
+[ext_resource type="Script" path="res://C#Scripts/Components/HealthComponent.cs" id="2_health"]
+[ext_resource type="Script" path="res://C#Scripts/Enemy/EnemyMovement.cs" id="3_movement"]
+[ext_resource type="Script" path="res://C#Scripts/Enemy/ChargerAI.cs" id="4_ai"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_charger"]
+size = Vector2(48, 30)
+
+[node name="Charger" type="CharacterBody2D"]
+script = ExtResource("1_controller")
+MovementSpeed = 70.0
+
+[node name="Body" type="Polygon2D" parent="."]
+color = Color(0.9, 0.5, 0.1, 1)
+polygon = PackedVector2Array(-24, -15, 14, -15, 24, 0, 14, 15, -24, 15)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_charger")
+
+[node name="LedgeCheck" type="RayCast2D" parent="."]
+position = Vector2(26, 0)
+target_position = Vector2(0, 29)
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("2_health")
+MaxHealth = 5
+
+[node name="EnemyMovement" type="Node" parent="."]
+script = ExtResource("3_movement")
+
+[node name="ChargerAI" type="Node" parent="."]
+script = ExtResource("4_ai")
