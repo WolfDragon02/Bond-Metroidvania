@@ -310,3 +310,6 @@ script = ExtResource("7_dtqjt")
 
 [node name="PlayerCombat" type="Node" parent="." unique_id=2069046609]
 script = ExtResource("8_5ncpa")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=14092789]
+position_smoothing_enabled = true
