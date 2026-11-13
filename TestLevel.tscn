@@ -137,3 +137,4 @@ text = "TEST LEVEL  /  MOVE  -  JUMP  -  ATTACK"
 
 [node name="Player" parent="." unique_id=1022889517 instance=ExtResource("1_y1jsw")]
 position = Vector2(92, 487)
+scale = Vector2(2, 2)

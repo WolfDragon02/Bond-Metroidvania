@@ -7,10 +7,12 @@
 [ext_resource type="Script" uid="uid://dgmbovmjsj7gl" path="res://C#Scripts/Components/HealthComponent.cs" id="4_e80uo"]
 [ext_resource type="Texture2D" uid="uid://dj0y706c415j3" path="res://PlayerCharacterAssets/2D Pixel Art Character Template - Platformer & Metroidvania/attacks/sword_attack_2.png" id="5_3tkgg"]
 [ext_resource type="Script" uid="uid://diyapm2eda4h7" path="res://C#Scripts/Player/PlayerMovement.cs" id="5_cxr5p"]
+[ext_resource type="Texture2D" uid="uid://bcb5u5081ejhj" path="res://PlayerCharacterAssets/2D Pixel Art Character Template - Platformer & Metroidvania/sprint/sprint_sword.png" id="5_l6ohk"]
 [ext_resource type="Texture2D" uid="uid://bbffcq3u47nb3" path="res://PlayerCharacterAssets/2D Pixel Art Character Template - Platformer & Metroidvania/attacks/sword_attack_3.png" id="6_l6ohk"]
 [ext_resource type="Script" uid="uid://cbrr1wd3wwfvc" path="res://C#Scripts/Player/PlayerHealth.cs" id="6_tdg3f"]
 [ext_resource type="Script" uid="uid://bj6qnigfowhw" path="res://C#Scripts/Player/PlayerAnimation.cs" id="7_dtqjt"]
 [ext_resource type="Script" uid="uid://dew7x0cmvwnpf" path="res://C#Scripts/Player/PlayerCombat.cs" id="8_5ncpa"]
+[ext_resource type="Texture2D" uid="uid://c1ccg2uvcub8y" path="res://PlayerCharacterAssets/2D Pixel Art Character Template - Platformer & Metroidvania/jump/up.png" id="8_d6rpx"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2n1s8"]
 atlas = ExtResource("3_wi0c6")
@@ -72,6 +74,18 @@ region = Rect2(384, 0, 128, 80)
 atlas = ExtResource("2_dtqjt")
 region = Rect2(512, 0, 128, 80)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_u4q42"]
+atlas = ExtResource("8_d6rpx")
+region = Rect2(0, 0, 128, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ctcj5"]
+atlas = ExtResource("8_d6rpx")
+region = Rect2(128, 0, 128, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_chpgb"]
+atlas = ExtResource("8_d6rpx")
+region = Rect2(256, 0, 128, 80)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_itxgx"]
 atlas = ExtResource("3_wi0c6")
 region = Rect2(0, 0, 128, 80)
@@ -94,6 +108,30 @@ region = Rect2(512, 0, 128, 80)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_47wu6"]
 atlas = ExtResource("3_wi0c6")
+region = Rect2(640, 0, 128, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f7new"]
+atlas = ExtResource("5_l6ohk")
+region = Rect2(0, 0, 128, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ravlb"]
+atlas = ExtResource("5_l6ohk")
+region = Rect2(128, 0, 128, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6efpq"]
+atlas = ExtResource("5_l6ohk")
+region = Rect2(256, 0, 128, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fhngp"]
+atlas = ExtResource("5_l6ohk")
+region = Rect2(384, 0, 128, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nd6qy"]
+atlas = ExtResource("5_l6ohk")
+region = Rect2(512, 0, 128, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_23wgl"]
+atlas = ExtResource("5_l6ohk")
 region = Rect2(640, 0, 128, 80)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1jgrc"]
@@ -181,7 +219,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_3tfrk")
 }],
-"loop": 1,
+"loop": 0,
 "name": &"Double Slash Attack",
 "speed": 12.0
 }, {
@@ -207,6 +245,20 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_u4q42")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ctcj5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_chpgb")
+}],
+"loop": 1,
+"name": &"Jump",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_itxgx")
 }, {
 "duration": 1.0,
@@ -226,6 +278,29 @@ animations = [{
 }],
 "loop": 0,
 "name": &"Light_Attack",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f7new")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ravlb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6efpq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fhngp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nd6qy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_23wgl")
+}],
+"loop": 1,
+"name": &"Sprint",
 "speed": 12.0
 }, {
 "frames": [{
@@ -282,8 +357,13 @@ animations = [{
 radius = 3.0
 height = 22.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oudfo"]
+size = Vector2(34.5, 39)
+
 [node name="Player" type="CharacterBody2D" unique_id=1022889517 groups=["player"]]
+scale = Vector2(2, 2)
 script = ExtResource("1_kne1u")
+MovementSpeed = 250.0
 metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=488772928]
@@ -291,7 +371,7 @@ sprite_frames = SubResource("SpriteFrames_j41mj")
 animation = &"Light_Attack"
 autoplay = "Idle"
 frame = 3
-frame_progress = 0.64142436
+frame_progress = 0.57684445
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1530706134]
 shape = SubResource("CapsuleShape2D_j41mj")
@@ -301,6 +381,7 @@ script = ExtResource("4_e80uo")
 
 [node name="PlayerMovement" type="Node" parent="." unique_id=687107526]
 script = ExtResource("5_cxr5p")
+JumpVelocity = -500.0
 
 [node name="PlayerHealth" type="Node" parent="." unique_id=495778500]
 script = ExtResource("6_tdg3f")
@@ -313,3 +394,10 @@ script = ExtResource("8_5ncpa")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=14092789]
 position_smoothing_enabled = true
+
+[node name="AttackHitbox" type="Area2D" parent="." unique_id=28386512]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackHitbox" unique_id=1704518849]
+position = Vector2(31.75, 4.5)
+shape = SubResource("RectangleShape2D_oudfo")
+
