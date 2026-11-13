@@ -6,14 +6,17 @@
 [ext_resource type="PackedScene" uid="uid://48ovpkom2b52" path="res://Familiar.tscn" id="4_ogl2o"]
 [ext_resource type="PackedScene" uid="uid://dretnwstmdusj" path="res://PauseMenu/Pause Menu.tscn" id="4_ucm2n"]
 [ext_resource type="PackedScene" path="res://Scenes/Enemies/Crawler.tscn" id="5_crawler"]
-[ext_resource type="PackedScene" path="res://Scenes/Enemies/Charger.tscn" id="6_charger"]
 [ext_resource type="Script" uid="uid://bikafsp3htduo" path="res://C#Scripts/Familiar/FamiliarMain.cs" id="5_k2kcu"]
+[ext_resource type="PackedScene" path="res://Scenes/Enemies/Charger.tscn" id="6_charger"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ghrau"]
 size = Vector2(495, 42)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ybggs"]
 size = Vector2(300, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xiswg"]
+size = Vector2(3514, 54.249992)
 
 [node name="Level" type="Node2D" unique_id=357643842]
 
@@ -35,7 +38,29 @@ position = Vector2(722, 650)
 shape = SubResource("RectangleShape2D_ghrau")
 
 [node name="Sprite2D" type="Sprite2D" parent="Floor2" unique_id=1196258591]
-position = Vector2(719, 582)
+position = Vector2(728, 582)
+scale = Vector2(7.835939, 2.8359373)
+texture = ExtResource("1_242oy")
+
+[node name="Floor3" type="StaticBody2D" parent="." unique_id=875376241]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor3" unique_id=1148043548]
+position = Vector2(1844, 668)
+shape = SubResource("RectangleShape2D_ghrau")
+
+[node name="Sprite2D" type="Sprite2D" parent="Floor3" unique_id=912552381]
+position = Vector2(1845, 601)
+scale = Vector2(7.835939, 2.8359373)
+texture = ExtResource("1_242oy")
+
+[node name="Floor4" type="StaticBody2D" parent="." unique_id=703823292]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor4" unique_id=1725627613]
+position = Vector2(1349, 670)
+shape = SubResource("RectangleShape2D_ghrau")
+
+[node name="Sprite2D" type="Sprite2D" parent="Floor4" unique_id=654863577]
+position = Vector2(1348, 601)
 scale = Vector2(7.835939, 2.8359373)
 texture = ExtResource("1_242oy")
 
@@ -51,15 +76,29 @@ position = Vector2(753, 484.5)
 scale = Vector2(4.75, 2.234375)
 texture = ExtResource("2_ucm2n")
 
+[node name="BorderL" type="StaticBody2D" parent="." unique_id=1498246565]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BorderL" unique_id=1403231700]
+position = Vector2(-15.25003, 676)
+rotation = 1.5707964
+shape = SubResource("RectangleShape2D_xiswg")
+
+[node name="BorderT" type="StaticBody2D" parent="." unique_id=749688600]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BorderT" unique_id=1014964081]
+position = Vector2(1669, -8.875005)
+shape = SubResource("RectangleShape2D_xiswg")
+
 [node name="Player" parent="." unique_id=1022889517 instance=ExtResource("2_oy1tr")]
 position = Vector2(119, 629)
 MovementSpeed = 250.0
 
-[node name="Crawler" parent="." instance=ExtResource("5_crawler")]
+[node name="Crawler" parent="." unique_id=326641827 instance=ExtResource("5_crawler")]
 position = Vector2(820, 617)
 
-[node name="Charger" parent="." instance=ExtResource("6_charger")]
+[node name="Charger" parent="." unique_id=275507321 instance=ExtResource("6_charger")]
 position = Vector2(751, 503)
+
 [node name="Familiar" parent="." unique_id=1671126897 instance=ExtResource("4_ogl2o")]
 position = Vector2(75, 612)
 script = ExtResource("5_k2kcu")
@@ -70,3 +109,4 @@ MovementSpeed = 100.0
 [node name="PauseMenu" parent="CanvasLayer" unique_id=595725861 instance=ExtResource("4_ucm2n")]
 offset_top = 4.0
 offset_bottom = 4.0
+metadata/_edit_lock_ = true
