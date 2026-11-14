@@ -3,28 +3,51 @@
 [ext_resource type="Script" path="res://C#Scripts/Enemy/EnemyController.cs" id="1_controller"]
 [ext_resource type="Script" path="res://C#Scripts/Components/HealthComponent.cs" id="2_health"]
 [ext_resource type="Script" path="res://C#Scripts/Enemy/EnemyMovement.cs" id="3_movement"]
+[ext_resource type="SpriteFrames" path="res://EnemyAssets/Crawler/crawler_frames.tres" id="4_frames"]
+[ext_resource type="Shader" path="res://EnemyAssets/enemy_flash.gdshader" id="5_flash"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_flash"]
+resource_local_to_scene = true
+shader = ExtResource("5_flash")
+shader_parameter/flash = 0.0
+shader_parameter/flash_color = Color(1, 1, 1, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_crawler"]
-size = Vector2(40, 24)
+size = Vector2(28, 14)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_contact"]
+size = Vector2(30, 16)
 
 [node name="Crawler" type="CharacterBody2D"]
 script = ExtResource("1_controller")
+ContactDamage = 10
 MovementSpeed = 80.0
 
-[node name="Body" type="Polygon2D" parent="."]
-color = Color(0.8, 0.25, 0.25, 1)
-polygon = PackedVector2Array(-20, -12, 20, -12, 20, 12, -20, 12)
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_flash")
+sprite_frames = ExtResource("4_frames")
+animation = &"walk"
+autoplay = "walk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 5)
 shape = SubResource("RectangleShape2D_crawler")
 
 [node name="LedgeCheck" type="RayCast2D" parent="."]
-position = Vector2(22, 0)
-target_position = Vector2(0, 24)
+position = Vector2(16, 5)
+target_position = Vector2(0, 14)
+
+[node name="ContactHitbox" type="Area2D" parent="."]
+collision_layer = 0
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ContactHitbox"]
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_contact")
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("2_health")
-MaxHealth = 3
+MaxHealth = 20
 
 [node name="EnemyMovement" type="Node" parent="."]
 script = ExtResource("3_movement")

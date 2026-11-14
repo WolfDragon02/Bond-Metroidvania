@@ -39,8 +39,9 @@ public partial class EnemyMovement : Node
 		ApplyDirection();
 	}
 
-	// Called by EnemyController every physics frame.
-	public void UpdateMovement(Entity enemy, double delta)
+	// Called by EnemyController every physics frame. canWalk = false
+	// keeps gravity but stops walking (e.g. while the enemy is hurt).
+	public void UpdateMovement(Entity enemy, double delta, bool canWalk = true)
 	{
 		Vector2 velocity = enemy.Velocity;
 
@@ -49,14 +50,16 @@ public partial class EnemyMovement : Node
 		{
 			velocity.Y += Gravity * (float)delta;
 		}
-		else if (TurnAtEdges && IsBlockedAhead(enemy))
+		else if (canWalk && TurnAtEdges && IsBlockedAhead(enemy))
 		{
 			// Turn around at a wall or the edge of a platform.
 			Direction = -_direction;
 		}
 
 		// Use MovementSpeed from the Entity class.
-		velocity.X = _direction * enemy.MovementSpeed * SpeedMultiplier;
+		velocity.X = canWalk
+			? _direction * enemy.MovementSpeed * SpeedMultiplier
+			: 0f;
 
 		enemy.Velocity = velocity;
 		enemy.MoveAndSlide();

@@ -9,6 +9,11 @@ public abstract partial class EnemyAI : Node
 	public abstract void UpdateAI(
 		EnemyController enemy, EnemyMovement movement, double delta);
 
+	// Called by EnemyController when the enemy takes damage.
+	public virtual void OnHurt(EnemyController enemy, EnemyMovement movement)
+	{
+	}
+
 	private Node2D _player;
 
 	// Finds the player through the "player" group set in Player.tscn.

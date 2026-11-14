@@ -28,17 +28,22 @@ public partial class ChargerAI : EnemyAI
 	[Export]
 	public double RecoverSeconds { get; set; } = 1.0;
 
-	// Modulate values above 1 brighten the body while it flashes.
-	private static readonly Color FlashColor = new Color(2f, 2f, 2f);
+	// How long the Charger stays dazed after slamming into a wall.
+	[Export]
+	public double StunSeconds { get; set; } = 1.8;
 
 	private enum State { Patrol, Telegraph, Charge, Recover }
 
 	private State _state = State.Patrol;
 	private double _timer;
 
+	// Optional dust trail kicked up while charging.
+	private CpuParticles2D _dust;
+
 	public override void UpdateAI(
 		EnemyController enemy, EnemyMovement movement, double delta)
 	{
+		_dust ??= enemy.GetNodeOrNull<CpuParticles2D>("Dust");
 		_timer -= delta;
 
 		switch (_state)
@@ -47,24 +52,27 @@ public partial class ChargerAI : EnemyAI
 				Node2D player = GetPlayer();
 				if (player != null && PlayerInRange(enemy, player))
 				{
-					// Face the player and stand still while flashing.
+					// Face the player and paw the ground while flashing.
 					movement.Direction =
 						player.GlobalPosition.X < enemy.GlobalPosition.X ? -1 : 1;
 					movement.SpeedMultiplier = 0f;
 					movement.TurnAtEdges = false;
+					enemy.AnimationOverride = "windup";
 					Enter(State.Telegraph, TelegraphSeconds);
 				}
 				break;
 
 			case State.Telegraph:
-				// Blink between bright and normal every 0.1 seconds.
+				// Blink every 0.1 seconds as a warning.
 				bool bright = (int)(_timer / 0.1) % 2 == 0;
-				enemy.Modulate = bright ? FlashColor : Colors.White;
+				enemy.SetFlash(bright ? 0.6f : 0f);
 
 				if (_timer <= 0)
 				{
-					enemy.Modulate = Colors.White;
+					enemy.SetFlash(0f);
 					movement.SpeedMultiplier = ChargeSpeedMultiplier;
+					enemy.AnimationOverride = "charge";
+					SetDust(movement.Direction, true);
 					Enter(State.Charge, ChargeSeconds);
 				}
 				break;
@@ -73,8 +81,10 @@ public partial class ChargerAI : EnemyAI
 				// Stop at a wall or ledge instead of turning around mid-charge.
 				if (_timer <= 0 || movement.IsBlockedAhead(enemy))
 				{
-					movement.SpeedMultiplier = 0f;
-					Enter(State.Recover, RecoverSeconds);
+					// Slamming into a wall leaves the Charger dazed for longer.
+					bool hitWall = enemy.IsOnWall();
+					EndCharge(enemy, movement, hitWall ? "stunned" : "idle",
+						hitWall ? StunSeconds : RecoverSeconds);
 				}
 				break;
 
@@ -83,10 +93,43 @@ public partial class ChargerAI : EnemyAI
 				{
 					movement.SpeedMultiplier = 1f;
 					movement.TurnAtEdges = true;
+					enemy.AnimationOverride = null;
 					Enter(State.Patrol, 0);
 				}
 				break;
 		}
+	}
+
+	public override void OnHurt(EnemyController enemy, EnemyMovement movement)
+	{
+		// Getting hit cancels the wind-up or the charge.
+		if (_state == State.Telegraph || _state == State.Charge)
+		{
+			EndCharge(enemy, movement, "idle", RecoverSeconds);
+		}
+	}
+
+	private void EndCharge(
+		EnemyController enemy, EnemyMovement movement,
+		string animation, double seconds)
+	{
+		enemy.SetFlash(0f);
+		movement.SpeedMultiplier = 0f;
+		enemy.AnimationOverride = animation;
+		SetDust(movement.Direction, false);
+		Enter(State.Recover, seconds);
+	}
+
+	// Turn the dust on or off, kicking it out behind the Charger.
+	private void SetDust(int direction, bool on)
+	{
+		if (_dust == null)
+			return;
+
+		_dust.Position = new Vector2(
+			-Math.Abs(_dust.Position.X) * direction, _dust.Position.Y);
+		_dust.Direction = new Vector2(-direction, _dust.Direction.Y);
+		_dust.Emitting = on;
 	}
 
 	private bool PlayerInRange(EnemyController enemy, Node2D player)
