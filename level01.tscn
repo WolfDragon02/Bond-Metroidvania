@@ -13,7 +13,7 @@
 size = Vector2(495, 42)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ybggs"]
-size = Vector2(300, 32)
+size = Vector2(299, 40)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xiswg"]
 size = Vector2(3514, 54.249992)
@@ -27,8 +27,8 @@ position = Vector2(235, 692)
 shape = SubResource("RectangleShape2D_ghrau")
 
 [node name="Sprite2D" type="Sprite2D" parent="Floor" unique_id=1689580524]
-position = Vector2(230.99998, 637)
-scale = Vector2(7.8437505, 2.203125)
+position = Vector2(231.49998, 506.5)
+scale = Vector2(7.8593755, 10.421874)
 texture = ExtResource("1_242oy")
 
 [node name="Floor2" type="StaticBody2D" parent="." unique_id=1109022939]
@@ -38,19 +38,19 @@ position = Vector2(722, 650)
 shape = SubResource("RectangleShape2D_ghrau")
 
 [node name="Sprite2D" type="Sprite2D" parent="Floor2" unique_id=1196258591]
-position = Vector2(728, 582)
-scale = Vector2(7.835939, 2.8359373)
+position = Vector2(724.125, 417.5)
+scale = Vector2(7.7148438, 13.078125)
 texture = ExtResource("1_242oy")
 
 [node name="Floor3" type="StaticBody2D" parent="." unique_id=875376241]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floor3" unique_id=1148043548]
-position = Vector2(1844, 668)
+position = Vector2(1844, 670)
 shape = SubResource("RectangleShape2D_ghrau")
 
 [node name="Sprite2D" type="Sprite2D" parent="Floor3" unique_id=912552381]
-position = Vector2(1845, 601)
-scale = Vector2(7.835939, 2.8359373)
+position = Vector2(1845.875, 402.50003)
+scale = Vector2(7.746093, 14.859375)
 texture = ExtResource("1_242oy")
 
 [node name="Floor4" type="StaticBody2D" parent="." unique_id=703823292]
@@ -60,20 +60,20 @@ position = Vector2(1349, 670)
 shape = SubResource("RectangleShape2D_ghrau")
 
 [node name="Sprite2D" type="Sprite2D" parent="Floor4" unique_id=654863577]
-position = Vector2(1348, 601)
-scale = Vector2(7.835939, 2.8359373)
+position = Vector2(1349.625, 401)
+scale = Vector2(7.8867197, 15.031251)
 texture = ExtResource("1_242oy")
 
 [node name="Platform" type="StaticBody2D" parent="." unique_id=1190522656]
 position = Vector2(0, -3)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Platform" unique_id=1542839237]
-position = Vector2(751, 537)
+position = Vector2(1591.5, 542)
 shape = SubResource("RectangleShape2D_ybggs")
 
 [node name="Sprite2D" type="Sprite2D" parent="Platform" unique_id=525837449]
-position = Vector2(753, 484.5)
-scale = Vector2(4.75, 2.234375)
+position = Vector2(1590.9999, 476.99997)
+scale = Vector2(4.7500024, 3.183594)
 texture = ExtResource("2_ucm2n")
 
 [node name="BorderL" type="StaticBody2D" parent="." unique_id=1498246565]
@@ -91,13 +91,12 @@ shape = SubResource("RectangleShape2D_xiswg")
 
 [node name="Player" parent="." unique_id=1022889517 instance=ExtResource("2_oy1tr")]
 position = Vector2(119, 629)
-MovementSpeed = 250.0
 
 [node name="Crawler" parent="." unique_id=326641827 instance=ExtResource("5_crawler")]
 position = Vector2(820, 617)
 
 [node name="Charger" parent="." unique_id=275507321 instance=ExtResource("6_charger")]
-position = Vector2(751, 503)
+position = Vector2(1514, 507)
 
 [node name="Familiar" parent="." unique_id=1671126897 instance=ExtResource("4_ogl2o")]
 position = Vector2(75, 612)
