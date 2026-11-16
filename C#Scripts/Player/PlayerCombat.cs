@@ -4,9 +4,12 @@ using System.Collections.Generic;
 
 public partial class PlayerCombat : Node
 {
-    // Damage dealt by a basic attack.
+    // Damage for each attack.
     [Export]
-    public int AttackDamage = 10;
+    public int LightAttackDamage = 10;
+
+    [Export]
+    public int HeavyAttackDamage = 20;
 
     // References to the player's nodes.
     private AnimatedSprite2D _sprite = null!;
@@ -15,7 +18,10 @@ public partial class PlayerCombat : Node
     // Tracks whether the player is attacking.
     private bool _isAttacking = false;
 
-    // Prevents hitting the same enemy twice per attack.
+    // Damage for the current attack.
+    private int _currentDamage;
+
+    // Prevent hitting the same enemy twice per attack.
     private HashSet<Node2D> _hitEnemies = new();
 
     private float _hitboxDistance;
@@ -36,10 +42,19 @@ public partial class PlayerCombat : Node
 
     public override void _Process(double delta)
     {
-        if (Input.IsActionJustPressed("light_attack")
-            && !_isAttacking)
+        // Do not start another attack while attacking.
+        if (_isAttacking)
+            return;
+
+        // Heavy attack input.
+        if (Input.IsActionJustPressed("heavy_attack"))
         {
-            Attack();
+            Attack("Heavy_Attack", HeavyAttackDamage);
+        }
+        // Light attack input.
+        else if (Input.IsActionJustPressed("light_attack"))
+        {
+            Attack("Light_Attack", LightAttackDamage);
         }
     }
 
@@ -76,28 +91,36 @@ public partial class PlayerCombat : Node
             if (!_hitEnemies.Add(body))
                 continue;
 
-            enemyHealth.TakeDamage(AttackDamage);
+            enemyHealth.TakeDamage(_currentDamage);
 
-            GD.Print($"Enemy took {AttackDamage} damage!");
+            GD.Print($"Enemy took {_currentDamage} damage!");
         }
     }
 
-    private void Attack()
+    private void Attack(string animationName, int damage)
     {
+        // Mark the player as attacking.
         _isAttacking = true;
+
+        // Set damage based on the attack type.
+        _currentDamage = damage;
 
         // Start a new attack.
         _hitEnemies.Clear();
 
-        // Play attack animation.
-        _sprite.Play("Light_Attack");
+        // Play the selected attack animation.
+        _sprite.Play(animationName);
 
-        GD.Print($"Light Attack! Damage: {AttackDamage}");
+        GD.Print($"{animationName}! Damage: {damage}");
     }
 
     private void OnAnimationFinished()
     {
-        if (_sprite.Animation.ToString() == "Light_Attack")
+        string animation = _sprite.Animation.ToString();
+
+        // End either attack when its animation finishes.
+        if (animation == "Light_Attack" ||
+            animation == "Heavy_Attack")
         {
             _isAttacking = false;
         }
