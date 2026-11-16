@@ -1,6 +1,7 @@
 
 using Godot;
 using System;
+
 public partial class PlayerAnimation : Node
 {
     private AnimatedSprite2D _sprite = null!;
@@ -13,8 +14,11 @@ public partial class PlayerAnimation : Node
 
     public void UpdateAnimation(CharacterBody2D player)
     {
-        // Do not interrupt the attack animation.
-        if (_sprite.Animation.ToString() == "Light_Attack"
+        // Do not interrupt light or heavy attacks.
+        string currentAnimation = _sprite.Animation.ToString();
+
+        if ((currentAnimation == "Light_Attack" ||
+             currentAnimation == "Heavy_Attack")
             && _sprite.IsPlaying())
         {
             return;
