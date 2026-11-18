@@ -1,0 +1,35 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://EnemyAssets/SlimeKing/shockwave_burst.png" id="1_burst"]
+
+[sub_resource type="AtlasTexture" id="burst_0"]
+atlas = ExtResource("1_burst")
+region = Rect2(0, 0, 520, 60)
+
+[sub_resource type="AtlasTexture" id="burst_1"]
+atlas = ExtResource("1_burst")
+region = Rect2(520, 0, 520, 60)
+
+[sub_resource type="AtlasTexture" id="burst_2"]
+atlas = ExtResource("1_burst")
+region = Rect2(1040, 0, 520, 60)
+
+[sub_resource type="AtlasTexture" id="burst_3"]
+atlas = ExtResource("1_burst")
+region = Rect2(1560, 0, 520, 60)
+
+[sub_resource type="AtlasTexture" id="burst_4"]
+atlas = ExtResource("1_burst")
+region = Rect2(2080, 0, 520, 60)
+
+[sub_resource type="AtlasTexture" id="burst_5"]
+atlas = ExtResource("1_burst")
+region = Rect2(2600, 0, 520, 60)
+
+[resource]
+animations = [{
+"frames": [{"duration": 1.0, "texture": SubResource("burst_0")}, {"duration": 1.0, "texture": SubResource("burst_1")}, {"duration": 1.0, "texture": SubResource("burst_2")}, {"duration": 1.0, "texture": SubResource("burst_3")}, {"duration": 1.0, "texture": SubResource("burst_4")}, {"duration": 1.0, "texture": SubResource("burst_5")}],
+"loop": false,
+"name": &"burst",
+"speed": 16.0
+}]

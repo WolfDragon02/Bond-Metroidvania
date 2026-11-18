@@ -1,0 +1,194 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://C#Scripts/Enemy/EnemyController.cs" id="1_controller"]
+[ext_resource type="Script" path="res://C#Scripts/Components/HealthComponent.cs" id="2_health"]
+[ext_resource type="Script" path="res://C#Scripts/Enemy/EnemyMovement.cs" id="3_movement"]
+[ext_resource type="Script" path="res://C#Scripts/Enemy/SlimeKingAI.cs" id="4_ai"]
+[ext_resource type="Script" path="res://C#Scripts/Enemy/BossHealthBar.cs" id="5_bar"]
+[ext_resource type="SpriteFrames" path="res://EnemyAssets/SlimeKing/slimeking_frames.tres" id="6_frames"]
+[ext_resource type="SpriteFrames" path="res://EnemyAssets/SlimeKing/shockwave_frames.tres" id="7_shockwave"]
+[ext_resource type="Shader" path="res://EnemyAssets/enemy_flash.gdshader" id="8_flash"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_flash"]
+resource_local_to_scene = true
+shader = ExtResource("8_flash")
+shader_parameter/flash = 0.0
+shader_parameter/flash_color = Color(1, 1, 1, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_body"]
+size = Vector2(168, 112)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_contact"]
+size = Vector2(176, 116)
+
+[sub_resource type="Gradient" id="Gradient_splatter"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_back"]
+bg_color = Color(0.1, 0.08, 0.14, 0.85)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.95, 0.78, 0.3, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_trail"]
+bg_color = Color(1, 0.93, 0.85, 0.9)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fill"]
+bg_color = Color(0.55, 0.4, 0.95, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_none"]
+
+[node name="SlimeKing" type="CharacterBody2D"]
+script = ExtResource("1_controller")
+ContactDamage = 15
+HurtSeconds = 0.1
+MovementSpeed = 70.0
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_flash")
+position = Vector2(0, -104)
+sprite_frames = ExtResource("6_frames")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -56)
+shape = SubResource("RectangleShape2D_body")
+
+[node name="LedgeCheck" type="RayCast2D" parent="."]
+position = Vector2(92, -56)
+target_position = Vector2(0, 80)
+
+[node name="ContactHitbox" type="Area2D" parent="."]
+collision_layer = 0
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ContactHitbox"]
+position = Vector2(0, -56)
+shape = SubResource("RectangleShape2D_contact")
+
+[node name="Shockwave" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(0, -30)
+sprite_frames = ExtResource("7_shockwave")
+animation = &"burst"
+
+[node name="Splatter" type="CPUParticles2D" parent="."]
+position = Vector2(0, -12)
+emitting = false
+amount = 24
+lifetime = 0.7
+one_shot = true
+explosiveness = 0.9
+local_coords = false
+emission_shape = 3
+emission_rect_extents = Vector2(80, 4)
+direction = Vector2(0, -1)
+spread = 70.0
+gravity = Vector2(0, 600)
+initial_velocity_min = 180.0
+initial_velocity_max = 380.0
+scale_amount_min = 6.0
+scale_amount_max = 10.0
+color_ramp = SubResource("Gradient_splatter")
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("2_health")
+MaxHealth = 160
+
+[node name="EnemyMovement" type="Node" parent="."]
+script = ExtResource("3_movement")
+
+[node name="SlimeKingAI" type="Node" parent="."]
+script = ExtResource("4_ai")
+
+[node name="BossBar" type="CanvasLayer" parent="."]
+layer = 5
+script = ExtResource("5_bar")
+
+[node name="Root" type="Control" parent="BossBar"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Name" type="Label" parent="BossBar/Root"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -300.0
+offset_top = -74.0
+offset_right = 300.0
+offset_bottom = -50.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(1, 0.95, 0.85, 1)
+theme_override_colors/font_outline_color = Color(0.1, 0.06, 0.12, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 18
+text = "Giant Slime King"
+horizontal_alignment = 1
+
+[node name="Trail" type="ProgressBar" parent="BossBar/Root"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -300.0
+offset_top = -48.0
+offset_right = 300.0
+offset_bottom = -32.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_back")
+theme_override_styles/fill = SubResource("StyleBoxFlat_trail")
+max_value = 160.0
+value = 160.0
+show_percentage = false
+
+[node name="Bar" type="ProgressBar" parent="BossBar/Root"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -298.0
+offset_top = -46.0
+offset_right = 298.0
+offset_bottom = -34.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme_override_styles/background = SubResource("StyleBoxEmpty_none")
+theme_override_styles/fill = SubResource("StyleBoxFlat_fill")
+max_value = 160.0
+value = 160.0
+show_percentage = false
+
+[node name="HalfMark" type="ColorRect" parent="BossBar/Root"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_top = -50.0
+offset_right = 1.0
+offset_bottom = -30.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+color = Color(0.95, 0.78, 0.3, 1)

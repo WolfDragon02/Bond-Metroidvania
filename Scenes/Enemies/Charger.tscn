@@ -14,10 +14,10 @@ shader_parameter/flash = 0.0
 shader_parameter/flash_color = Color(1, 1, 1, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_charger"]
-size = Vector2(40, 24)
+size = Vector2(80, 48)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_contact"]
-size = Vector2(42, 26)
+size = Vector2(84, 52)
 
 [sub_resource type="Gradient" id="Gradient_dust"]
 colors = PackedColorArray(0.86, 0.76, 0.62, 0.9, 0.86, 0.76, 0.62, 0)
@@ -29,42 +29,42 @@ MovementSpeed = 70.0
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_flash")
-position = Vector2(0, -3)
+position = Vector2(0, -36)
 sprite_frames = ExtResource("5_frames")
 animation = &"walk"
 autoplay = "walk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 3)
+position = Vector2(0, -24)
 shape = SubResource("RectangleShape2D_charger")
 
 [node name="LedgeCheck" type="RayCast2D" parent="."]
-position = Vector2(22, 3)
-target_position = Vector2(0, 22)
+position = Vector2(44, -24)
+target_position = Vector2(0, 44)
 
 [node name="ContactHitbox" type="Area2D" parent="."]
 collision_layer = 0
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ContactHitbox"]
-position = Vector2(0, 3)
+position = Vector2(0, -24)
 shape = SubResource("RectangleShape2D_contact")
 
 [node name="Dust" type="CPUParticles2D" parent="."]
-position = Vector2(-16, 14)
+position = Vector2(-32, -2)
 emitting = false
 amount = 18
 lifetime = 0.45
 local_coords = false
 emission_shape = 3
-emission_rect_extents = Vector2(4, 1)
+emission_rect_extents = Vector2(8, 2)
 direction = Vector2(-1, -0.5)
 spread = 25.0
 gravity = Vector2(0, -30)
-initial_velocity_min = 20.0
-initial_velocity_max = 55.0
-scale_amount_min = 2.0
-scale_amount_max = 3.0
+initial_velocity_min = 30.0
+initial_velocity_max = 80.0
+scale_amount_min = 4.0
+scale_amount_max = 6.0
 color_ramp = SubResource("Gradient_dust")
 
 [node name="HealthComponent" type="Node" parent="."]
