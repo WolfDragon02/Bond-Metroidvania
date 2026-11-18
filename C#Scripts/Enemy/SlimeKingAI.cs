@@ -127,6 +127,15 @@ public partial class SlimeKingAI : EnemyAI
 	[Export]
 	public double EnrageSeconds { get; set; } = 1.2;
 
+	// How fast a player stuck under the boss is pushed out to its side.
+	[Export]
+	public float PushOutSpeed { get; set; } = 900f;
+
+	// Half the width of the boss's contact hitbox plus the player's width,
+	// so a pushed-out player is clear of contact damage.
+	[Export]
+	public float PushOutHalfWidth { get; set; } = 98f;
+
 	public override bool ControlsMovement => true;
 
 	// True once the fight has started (the health bar shows from then on).
@@ -144,6 +153,7 @@ public partial class SlimeKingAI : EnemyAI
 	private bool _enragePending;
 	private bool _secondSlamDone;
 	private int _attackCount;
+	private int _pushDirection;
 
 	private HealthComponent _health;
 	private AnimatedSprite2D _shockwave;
@@ -249,6 +259,8 @@ public partial class SlimeKingAI : EnemyAI
 			case State.Slam:
 				velocity = new Vector2(0, SlamSpeed);
 				enemy.AnimationOverride = Anim("fall");
+				// The shockwave is this attack's hit, not touching the boss.
+				enemy.DelayContactDamage(0.1);
 				break;
 
 			case State.Recover:
@@ -311,6 +323,45 @@ public partial class SlimeKingAI : EnemyAI
 		if (_state == State.Slam && _wasOnFloor)
 		{
 			Land(enemy, movement, player);
+		}
+
+		PushPlayerOut(enemy, player, delta);
+	}
+
+	// The player passes through enemies, so after the boss lands on them
+	// they would be stuck inside it taking contact damage. While the boss
+	// is on the ground, slide a grounded player out to the nearer side
+	// (or the other side if a wall is in the way). Jumping over the boss
+	// is left alone.
+	private void PushPlayerOut(EnemyController enemy, Node2D player, double delta)
+	{
+		if (player is not CharacterBody2D body || !enemy.IsOnFloor() || !body.IsOnFloor())
+		{
+			_pushDirection = 0;
+			return;
+		}
+
+		Vector2 offset = player.GlobalPosition - enemy.GlobalPosition;
+		bool inside = Math.Abs(offset.X) < PushOutHalfWidth
+			&& offset.Y > -112f && offset.Y < 10f;
+		if (!inside)
+		{
+			_pushDirection = 0;
+			return;
+		}
+
+		if (_pushDirection == 0)
+		{
+			_pushDirection = offset.X < 0 ? -1 : 1;
+		}
+
+		float step = Math.Min(PushOutSpeed * (float)delta,
+			PushOutHalfWidth - Math.Abs(offset.X) * Math.Sign(offset.X) * _pushDirection);
+		var hit = body.MoveAndCollide(new Vector2(_pushDirection * Math.Max(step, 1f), 0));
+		if (hit != null && Math.Abs(hit.GetNormal().X) > 0.5f)
+		{
+			// Blocked by a wall: push toward the other side instead.
+			_pushDirection = -_pushDirection;
 		}
 	}
 
@@ -410,6 +461,8 @@ public partial class SlimeKingAI : EnemyAI
 			if (Math.Abs(offset.X) <= ImpactRadius && Math.Abs(offset.Y) <= 60f)
 			{
 				target.TakeDamage(ImpactDamage);
+				// One hit per landing: no contact damage on top of the shockwave.
+				enemy.DelayContactDamage(enemy.ContactCooldown);
 			}
 		}
 

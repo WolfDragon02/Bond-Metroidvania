@@ -43,7 +43,8 @@ bg_color = Color(0.55, 0.4, 0.95, 1)
 
 [node name="SlimeKing" type="CharacterBody2D"]
 script = ExtResource("1_controller")
-ContactDamage = 15
+ContactDamage = 5
+ContactCooldown = 1.5
 HurtSeconds = 0.1
 MovementSpeed = 70.0
 
