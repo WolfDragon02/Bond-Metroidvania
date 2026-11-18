@@ -25,15 +25,43 @@ public partial class FamiliarDiscovery : Area2D
 	
 	public void Reveal()
 	{
+		GD.Print("FamiliarDiscovery.Reveal() entered!");
+		
 		if (IsRevealed)
+		{
+			GD.Print("Discovery already revealed.");
 			return;
+		}
+		
+		if (HiddenObject == null) 
+		{
+			GD.PushError(
+				"ERROR: HiddenObject is not assigned!"
+			);
+			return;
+		}
+		
+		GD.Print("Hidden object: ", HiddenObject.Name);
+		GD.Print("Before reveal: ", HiddenObject.Visible);
+		
+		HiddenObject.Show();
+		
+		GD.Print("After reveal: ", HiddenObject.Visible);
+		GD.Print("Visible in tree: ", 
+			HiddenObject.IsVisibleInTree());
 		
 		IsRevealed = true;
 		
+		GD.Print("Reveal() called!");
 		if (HiddenObject != null)
+		{
 			HiddenObject.Visible = true;
-			
-		GD.Print("Discovery revealed!");
+			GD.Print("Hidden object made visible!");
+		}
+		else
+		{
+			GD.PrintErr("HiddenObject is not assigned!");
+		}
 	}
 	
 	public void CompleteDiscovery()
