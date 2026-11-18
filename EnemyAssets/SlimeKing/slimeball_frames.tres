@@ -1,0 +1,93 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://EnemyAssets/SlimeKing/slimeball_fly.png" id="1_fly"]
+[ext_resource type="Texture2D" path="res://EnemyAssets/SlimeKing/slimeball_splat.png" id="2_splat"]
+[ext_resource type="Texture2D" path="res://EnemyAssets/SlimeKing/slimeball_fly_rage.png" id="3_fly_rage"]
+[ext_resource type="Texture2D" path="res://EnemyAssets/SlimeKing/slimeball_splat_rage.png" id="4_splat_rage"]
+
+[sub_resource type="AtlasTexture" id="fly_0"]
+atlas = ExtResource("1_fly")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="fly_1"]
+atlas = ExtResource("1_fly")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="fly_2"]
+atlas = ExtResource("1_fly")
+region = Rect2(48, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="fly_3"]
+atlas = ExtResource("1_fly")
+region = Rect2(72, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="splat_0"]
+atlas = ExtResource("2_splat")
+region = Rect2(0, 0, 40, 20)
+
+[sub_resource type="AtlasTexture" id="splat_1"]
+atlas = ExtResource("2_splat")
+region = Rect2(40, 0, 40, 20)
+
+[sub_resource type="AtlasTexture" id="splat_2"]
+atlas = ExtResource("2_splat")
+region = Rect2(80, 0, 40, 20)
+
+[sub_resource type="AtlasTexture" id="splat_3"]
+atlas = ExtResource("2_splat")
+region = Rect2(120, 0, 40, 20)
+
+[sub_resource type="AtlasTexture" id="fly_rage_0"]
+atlas = ExtResource("3_fly_rage")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="fly_rage_1"]
+atlas = ExtResource("3_fly_rage")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="fly_rage_2"]
+atlas = ExtResource("3_fly_rage")
+region = Rect2(48, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="fly_rage_3"]
+atlas = ExtResource("3_fly_rage")
+region = Rect2(72, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="splat_rage_0"]
+atlas = ExtResource("4_splat_rage")
+region = Rect2(0, 0, 40, 20)
+
+[sub_resource type="AtlasTexture" id="splat_rage_1"]
+atlas = ExtResource("4_splat_rage")
+region = Rect2(40, 0, 40, 20)
+
+[sub_resource type="AtlasTexture" id="splat_rage_2"]
+atlas = ExtResource("4_splat_rage")
+region = Rect2(80, 0, 40, 20)
+
+[sub_resource type="AtlasTexture" id="splat_rage_3"]
+atlas = ExtResource("4_splat_rage")
+region = Rect2(120, 0, 40, 20)
+
+[resource]
+animations = [{
+"frames": [{"duration": 1.0, "texture": SubResource("fly_0")}, {"duration": 1.0, "texture": SubResource("fly_1")}, {"duration": 1.0, "texture": SubResource("fly_2")}, {"duration": 1.0, "texture": SubResource("fly_3")}],
+"loop": true,
+"name": &"fly",
+"speed": 10.0
+}, {
+"frames": [{"duration": 1.0, "texture": SubResource("splat_0")}, {"duration": 1.0, "texture": SubResource("splat_1")}, {"duration": 1.0, "texture": SubResource("splat_2")}, {"duration": 1.0, "texture": SubResource("splat_3")}],
+"loop": false,
+"name": &"splat",
+"speed": 14.0
+}, {
+"frames": [{"duration": 1.0, "texture": SubResource("fly_rage_0")}, {"duration": 1.0, "texture": SubResource("fly_rage_1")}, {"duration": 1.0, "texture": SubResource("fly_rage_2")}, {"duration": 1.0, "texture": SubResource("fly_rage_3")}],
+"loop": true,
+"name": &"fly_rage",
+"speed": 10.0
+}, {
+"frames": [{"duration": 1.0, "texture": SubResource("splat_rage_0")}, {"duration": 1.0, "texture": SubResource("splat_rage_1")}, {"duration": 1.0, "texture": SubResource("splat_rage_2")}, {"duration": 1.0, "texture": SubResource("splat_rage_3")}],
+"loop": false,
+"name": &"splat_rage",
+"speed": 14.0
+}]

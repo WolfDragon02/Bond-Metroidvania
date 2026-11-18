@@ -6,6 +6,7 @@
 [ext_resource type="SpriteFrames" path="res://EnemyAssets/Crawler/crawler_frames.tres" id="4_frames"]
 [ext_resource type="Shader" path="res://EnemyAssets/enemy_flash.gdshader" id="5_flash"]
 [ext_resource type="Script" path="res://C#Scripts/Enemy/EnemyHealthBar.cs" id="6_bar"]
+[ext_resource type="Script" path="res://C#Scripts/Enemy/CrawlerAI.cs" id="7_ai"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_flash"]
 resource_local_to_scene = true
@@ -53,6 +54,9 @@ MaxHealth = 20
 
 [node name="EnemyMovement" type="Node" parent="."]
 script = ExtResource("3_movement")
+
+[node name="CrawlerAI" type="Node" parent="."]
+script = ExtResource("7_ai")
 
 [node name="HealthBar" type="Node2D" parent="."]
 position = Vector2(0, -58)

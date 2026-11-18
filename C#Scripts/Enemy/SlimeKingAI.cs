@@ -2,24 +2,42 @@ using Godot;
 using System;
 
 // The Giant Slime King boss.
-// Phase 1 (above half health): walks toward the player, jumps, hangs in
-// the air for a moment above where it will land, slams down with a
-// damaging shockwave, then rests so the player can attack.
-// Phase 2 (half health or less): enraged. Moves faster, jumps farther
-// and rests for less time.
+// Phase 1 (above half health): hops toward the player, then picks an
+// attack. Up close it jumps, hangs in the air above where it will land,
+// and slams down with a damaging shockwave, then rests so the player can
+// attack. When the player keeps their distance (and every few attacks) it
+// spits a spread of slime globs that land around the player instead.
+// Phase 2 (half health or less): enraged. Hops faster and farther, spits
+// more globs, slams twice in a row, splashes globs out when it lands and
+// rests for less time.
 public partial class SlimeKingAI : EnemyAI
 {
 	// The fight starts when the player comes this close.
 	[Export]
 	public float WakeRange { get; set; } = 500f;
 
-	// Longest the boss walks before it jumps anyway.
+	// Longest the boss hops toward the player before it attacks anyway.
 	[Export]
-	public double ApproachSeconds { get; set; } = 1.4;
+	public double ApproachSeconds { get; set; } = 2.4;
 
-	// The boss jumps as soon as the player is this close.
+	// The boss jump-slams as soon as the player is this close.
 	[Export]
 	public float JumpTriggerRange { get; set; } = 260f;
+
+	// ---- Hopping (how the boss gets around)
+
+	[Export]
+	public float HopHeight { get; set; } = 60f;
+
+	// Farthest one hop travels.
+	[Export]
+	public float HopDistance { get; set; } = 110f;
+
+	// Squish on the ground between hops.
+	[Export]
+	public double HopPauseSeconds { get; set; } = 0.3;
+
+	// ---- Jump slam
 
 	// Squash before a jump; this is the player's warning.
 	[Export]
@@ -51,7 +69,38 @@ public partial class SlimeKingAI : EnemyAI
 	[Export]
 	public double RecoverSeconds { get; set; } = 1.5;
 
-	// Phase 2 changes.
+	// ---- Spitting slime globs
+
+	[Export]
+	public PackedScene SlimeBallScene { get; set; }
+
+	// The boss spits instead of jumping when the player is farther than this.
+	[Export]
+	public float SpitRange { get; set; } = 380f;
+
+	// Every this many attacks is a spit, even up close. 0 turns it off.
+	[Export]
+	public int SpitEvery { get; set; } = 3;
+
+	// The breath in before spitting; this is the player's warning.
+	[Export]
+	public double InhaleSeconds { get; set; } = 0.55;
+
+	[Export]
+	public int GlobsPerVolley { get; set; } = 3;
+
+	// Gap between where the globs land, centered on the player.
+	[Export]
+	public float GlobSpacing { get; set; } = 95f;
+
+	[Export]
+	public double GlobFlightSeconds { get; set; } = 0.95;
+
+	[Export]
+	public double SpitRecoverSeconds { get; set; } = 0.6;
+
+	// ---- Phase 2 changes
+
 	[Export]
 	public float EnragedSpeedMultiplier { get; set; } = 1.6f;
 
@@ -64,6 +113,16 @@ public partial class SlimeKingAI : EnemyAI
 	[Export]
 	public double EnragedRecoverSeconds { get; set; } = 0.6;
 
+	[Export]
+	public double EnragedInhaleSeconds { get; set; } = 0.35;
+
+	[Export]
+	public int EnragedGlobsPerVolley { get; set; } = 5;
+
+	// Globs splashed out to each side when the enraged boss lands.
+	[Export]
+	public int SplashGlobsPerSide { get; set; } = 2;
+
 	// Length of the roar when phase 2 starts.
 	[Export]
 	public double EnrageSeconds { get; set; } = 1.2;
@@ -75,12 +134,16 @@ public partial class SlimeKingAI : EnemyAI
 
 	public bool Enraged { get; private set; }
 
-	private enum State { Asleep, Approach, Windup, Rise, Hang, Slam, Recover, Enrage }
+	private enum State { Asleep, Approach, Windup, Rise, Hang, Slam, Recover, Inhale, Spit, Enrage }
 
 	private State _state = State.Asleep;
 	private double _timer;
 	private double _stateTime;
+	private double _hopPause;
+	private bool _wasOnFloor = true;
 	private bool _enragePending;
+	private bool _secondSlamDone;
+	private int _attackCount;
 
 	private HealthComponent _health;
 	private AnimatedSprite2D _shockwave;
@@ -106,6 +169,8 @@ public partial class SlimeKingAI : EnemyAI
 		Node2D player = GetPlayer();
 		Vector2 velocity = enemy.Velocity;
 		float gravity = movement.Gravity * (float)delta;
+		float dx = player != null ? player.GlobalPosition.X - enemy.GlobalPosition.X : 0;
+		bool onFloor = enemy.IsOnFloor();
 
 		switch (_state)
 		{
@@ -124,16 +189,31 @@ public partial class SlimeKingAI : EnemyAI
 				if (TryStartEnrage(enemy, ref velocity))
 					break;
 
-				float dx = player != null ? player.GlobalPosition.X - enemy.GlobalPosition.X : 0;
-				movement.Direction = dx < 0 ? -1 : 1;
-				float speed = enemy.MovementSpeed * (Enraged ? EnragedSpeedMultiplier : 1f);
-				velocity.X = movement.IsBlockedAhead(enemy) ? 0 : movement.Direction * speed;
-				enemy.AnimationOverride = Anim("walk");
+				if (!onFloor)
+				{
+					// Mid-hop: keep the hop's speed and pick the right pose.
+					enemy.AnimationOverride = Anim(velocity.Y < 0 ? "jump" : "fall");
+					break;
+				}
 
+				velocity.X = 0;
+				movement.Direction = dx < 0 ? -1 : 1;
+				enemy.AnimationOverride = Anim("land");
+
+				if (!_wasOnFloor)
+				{
+					// Just landed a hop: squish for a moment.
+					_hopPause = Enraged ? HopPauseSeconds / 2 : HopPauseSeconds;
+				}
+
+				_hopPause -= delta;
 				if (_timer <= 0 || Math.Abs(dx) <= JumpTriggerRange)
 				{
-					velocity.X = 0;
-					Enter(State.Windup, Enraged ? EnragedWindupSeconds : WindupSeconds);
+					ChooseAttack(dx);
+				}
+				else if (_hopPause <= 0)
+				{
+					velocity = Hop(enemy, movement, dx);
 				}
 				break;
 
@@ -184,6 +264,26 @@ public partial class SlimeKingAI : EnemyAI
 				}
 				break;
 
+			case State.Inhale:
+				velocity.X = 0;
+				movement.Direction = dx < 0 ? -1 : 1;
+				enemy.AnimationOverride = Anim("inhale");
+				if (_timer <= 0)
+				{
+					SpitVolley(enemy, movement, player);
+					Enter(State.Spit, SpitRecoverSeconds);
+				}
+				break;
+
+			case State.Spit:
+				velocity.X = 0;
+				enemy.AnimationOverride = Anim("spit");
+				if (_timer <= 0)
+				{
+					Enter(State.Approach, ApproachSeconds);
+				}
+				break;
+
 			case State.Enrage:
 				velocity.X = 0;
 				enemy.AnimationOverride = "enrage";
@@ -199,17 +299,18 @@ public partial class SlimeKingAI : EnemyAI
 
 		// Gravity everywhere except the jump arc, the hang and the slam.
 		if (_state != State.Rise && _state != State.Hang && _state != State.Slam
-			&& !enemy.IsOnFloor())
+			&& !onFloor)
 		{
 			velocity.Y += gravity;
 		}
 
 		enemy.Velocity = velocity;
 		enemy.MoveAndSlide();
+		_wasOnFloor = enemy.IsOnFloor();
 
-		if (_state == State.Slam && enemy.IsOnFloor())
+		if (_state == State.Slam && _wasOnFloor)
 		{
-			Land(enemy, player);
+			Land(enemy, movement, player);
 		}
 	}
 
@@ -244,6 +345,33 @@ public partial class SlimeKingAI : EnemyAI
 		return true;
 	}
 
+	// Spit when the player is far away and every few attacks; otherwise slam.
+	private void ChooseAttack(float dx)
+	{
+		_attackCount++;
+		bool spitTurn = SpitEvery > 0 && _attackCount % SpitEvery == 0;
+		if (SlimeBallScene != null && (Math.Abs(dx) > SpitRange || spitTurn))
+		{
+			Enter(State.Inhale, Enraged ? EnragedInhaleSeconds : InhaleSeconds);
+		}
+		else
+		{
+			_secondSlamDone = false;
+			Enter(State.Windup, Enraged ? EnragedWindupSeconds : WindupSeconds);
+		}
+	}
+
+	// A small hop toward the player. Hops stop short at walls.
+	private Vector2 Hop(EnemyController enemy, EnemyMovement movement, float dx)
+	{
+		float reach = HopDistance * (Enraged ? EnragedSpeedMultiplier : 1f);
+		float distance = movement.IsBlockedAhead(enemy) ? 0 : Math.Min(Math.Abs(dx), reach);
+
+		float upSpeed = (float)Math.Sqrt(2 * movement.Gravity * HopHeight);
+		float airSeconds = 2 * upSpeed / movement.Gravity;
+		return new Vector2(movement.Direction * distance / airSeconds, -upSpeed);
+	}
+
 	// Launch toward the player so the top of the jump is right above
 	// where the boss will land.
 	private Vector2 StartJump(EnemyController enemy, EnemyMovement movement, Node2D player)
@@ -260,7 +388,7 @@ public partial class SlimeKingAI : EnemyAI
 		return new Vector2(dx / secondsToTop, -upSpeed);
 	}
 
-	private void Land(EnemyController enemy, Node2D player)
+	private void Land(EnemyController enemy, EnemyMovement movement, Node2D player)
 	{
 		if (_shockwave != null)
 		{
@@ -285,7 +413,65 @@ public partial class SlimeKingAI : EnemyAI
 			}
 		}
 
-		Enter(State.Recover, Enraged ? EnragedRecoverSeconds : RecoverSeconds);
+		if (!Enraged)
+		{
+			Enter(State.Recover, RecoverSeconds);
+			return;
+		}
+
+		// Phase 2: globs splash out both ways, and the first slam is
+		// followed right away by a second one.
+		for (int i = 0; i < SplashGlobsPerSide; i++)
+		{
+			float speed = 200f + 160f * i;
+			float up = 430f - 90f * i;
+			ThrowGlob(enemy, enemy.GlobalPosition + new Vector2(-60, -40), new Vector2(-speed, -up));
+			ThrowGlob(enemy, enemy.GlobalPosition + new Vector2(60, -40), new Vector2(speed, -up));
+		}
+
+		if (!_secondSlamDone)
+		{
+			_secondSlamDone = true;
+			Enter(State.Windup, EnragedWindupSeconds);
+		}
+		else
+		{
+			Enter(State.Recover, EnragedRecoverSeconds);
+		}
+	}
+
+	// Spits a spread of globs timed to land around where the player stands,
+	// so the player has to move to a gap between them.
+	private void SpitVolley(EnemyController enemy, EnemyMovement movement, Node2D player)
+	{
+		if (player == null)
+			return;
+
+		int count = Enraged ? EnragedGlobsPerVolley : GlobsPerVolley;
+		float flight = (float)(Enraged ? GlobFlightSeconds * 0.8 : GlobFlightSeconds);
+		float gravity = movement.Gravity;
+		Vector2 mouth = enemy.GlobalPosition + new Vector2(movement.Direction * 28, -60);
+
+		for (int i = 0; i < count; i++)
+		{
+			float offset = (i - (count - 1) / 2f) * GlobSpacing;
+			Vector2 target = player.GlobalPosition + new Vector2(offset, 0);
+			Vector2 velocity = new(
+				(target.X - mouth.X) / flight,
+				(target.Y - mouth.Y - 0.5f * gravity * flight * flight) / flight);
+			ThrowGlob(enemy, mouth, velocity);
+		}
+	}
+
+	private void ThrowGlob(EnemyController enemy, Vector2 from, Vector2 velocity)
+	{
+		if (SlimeBallScene == null)
+			return;
+
+		SlimeBall glob = SlimeBallScene.Instantiate<SlimeBall>();
+		enemy.GetParent().AddChild(glob);
+		glob.GlobalPosition = from;
+		glob.Launch(velocity, Enraged);
 	}
 
 	// Phase 2 uses the red "_rage" versions of the animations.

@@ -1,0 +1,13 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://C#Scripts/Enemy/SlimeBall.cs" id="1_ball"]
+[ext_resource type="SpriteFrames" path="res://EnemyAssets/SlimeKing/slimeball_frames.tres" id="2_frames"]
+
+[node name="SlimeBall" type="Node2D"]
+z_index = 5
+script = ExtResource("1_ball")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = ExtResource("2_frames")
+animation = &"fly"
+autoplay = "fly"

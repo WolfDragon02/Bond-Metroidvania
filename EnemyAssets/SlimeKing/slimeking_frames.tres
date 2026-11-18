@@ -16,8 +16,12 @@
 [ext_resource type="Texture2D" path="res://EnemyAssets/SlimeKing/slimeking_fall_rage.png" id="14_fall_rage"]
 [ext_resource type="Texture2D" path="res://EnemyAssets/SlimeKing/slimeking_land_rage.png" id="15_land_rage"]
 [ext_resource type="Texture2D" path="res://EnemyAssets/SlimeKing/slimeking_recover_rage.png" id="16_recover_rage"]
-[ext_resource type="Texture2D" path="res://EnemyAssets/SlimeKing/slimeking_enrage.png" id="17_enrage"]
-[ext_resource type="Texture2D" path="res://EnemyAssets/SlimeKing/slimeking_death.png" id="18_death"]
+[ext_resource type="Texture2D" path="res://EnemyAssets/SlimeKing/slimeking_inhale.png" id="17_inhale"]
+[ext_resource type="Texture2D" path="res://EnemyAssets/SlimeKing/slimeking_spit.png" id="18_spit"]
+[ext_resource type="Texture2D" path="res://EnemyAssets/SlimeKing/slimeking_inhale_rage.png" id="19_inhale_rage"]
+[ext_resource type="Texture2D" path="res://EnemyAssets/SlimeKing/slimeking_spit_rage.png" id="20_spit_rage"]
+[ext_resource type="Texture2D" path="res://EnemyAssets/SlimeKing/slimeking_enrage.png" id="21_enrage"]
+[ext_resource type="Texture2D" path="res://EnemyAssets/SlimeKing/slimeking_death.png" id="22_death"]
 
 [sub_resource type="AtlasTexture" id="idle_0"]
 atlas = ExtResource("1_idle")
@@ -251,60 +255,100 @@ region = Rect2(544, 0, 272, 208)
 atlas = ExtResource("16_recover_rage")
 region = Rect2(816, 0, 272, 208)
 
+[sub_resource type="AtlasTexture" id="inhale_0"]
+atlas = ExtResource("17_inhale")
+region = Rect2(0, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="inhale_1"]
+atlas = ExtResource("17_inhale")
+region = Rect2(272, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="spit_0"]
+atlas = ExtResource("18_spit")
+region = Rect2(0, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="spit_1"]
+atlas = ExtResource("18_spit")
+region = Rect2(272, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="spit_2"]
+atlas = ExtResource("18_spit")
+region = Rect2(544, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="inhale_rage_0"]
+atlas = ExtResource("19_inhale_rage")
+region = Rect2(0, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="inhale_rage_1"]
+atlas = ExtResource("19_inhale_rage")
+region = Rect2(272, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="spit_rage_0"]
+atlas = ExtResource("20_spit_rage")
+region = Rect2(0, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="spit_rage_1"]
+atlas = ExtResource("20_spit_rage")
+region = Rect2(272, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="spit_rage_2"]
+atlas = ExtResource("20_spit_rage")
+region = Rect2(544, 0, 272, 208)
+
 [sub_resource type="AtlasTexture" id="enrage_0"]
-atlas = ExtResource("17_enrage")
+atlas = ExtResource("21_enrage")
 region = Rect2(0, 0, 272, 208)
 
 [sub_resource type="AtlasTexture" id="enrage_1"]
-atlas = ExtResource("17_enrage")
+atlas = ExtResource("21_enrage")
 region = Rect2(272, 0, 272, 208)
 
 [sub_resource type="AtlasTexture" id="enrage_2"]
-atlas = ExtResource("17_enrage")
+atlas = ExtResource("21_enrage")
 region = Rect2(544, 0, 272, 208)
 
 [sub_resource type="AtlasTexture" id="enrage_3"]
-atlas = ExtResource("17_enrage")
+atlas = ExtResource("21_enrage")
 region = Rect2(816, 0, 272, 208)
 
 [sub_resource type="AtlasTexture" id="enrage_4"]
-atlas = ExtResource("17_enrage")
+atlas = ExtResource("21_enrage")
 region = Rect2(1088, 0, 272, 208)
 
 [sub_resource type="AtlasTexture" id="enrage_5"]
-atlas = ExtResource("17_enrage")
+atlas = ExtResource("21_enrage")
 region = Rect2(1360, 0, 272, 208)
 
 [sub_resource type="AtlasTexture" id="death_0"]
-atlas = ExtResource("18_death")
+atlas = ExtResource("22_death")
 region = Rect2(0, 0, 272, 208)
 
 [sub_resource type="AtlasTexture" id="death_1"]
-atlas = ExtResource("18_death")
+atlas = ExtResource("22_death")
 region = Rect2(272, 0, 272, 208)
 
 [sub_resource type="AtlasTexture" id="death_2"]
-atlas = ExtResource("18_death")
+atlas = ExtResource("22_death")
 region = Rect2(544, 0, 272, 208)
 
 [sub_resource type="AtlasTexture" id="death_3"]
-atlas = ExtResource("18_death")
+atlas = ExtResource("22_death")
 region = Rect2(816, 0, 272, 208)
 
 [sub_resource type="AtlasTexture" id="death_4"]
-atlas = ExtResource("18_death")
+atlas = ExtResource("22_death")
 region = Rect2(1088, 0, 272, 208)
 
 [sub_resource type="AtlasTexture" id="death_5"]
-atlas = ExtResource("18_death")
+atlas = ExtResource("22_death")
 region = Rect2(1360, 0, 272, 208)
 
 [sub_resource type="AtlasTexture" id="death_6"]
-atlas = ExtResource("18_death")
+atlas = ExtResource("22_death")
 region = Rect2(1632, 0, 272, 208)
 
 [sub_resource type="AtlasTexture" id="death_7"]
-atlas = ExtResource("18_death")
+atlas = ExtResource("22_death")
 region = Rect2(1904, 0, 272, 208)
 
 [resource]
@@ -388,6 +432,26 @@ animations = [{
 "loop": true,
 "name": &"recover_rage",
 "speed": 7.0
+}, {
+"frames": [{"duration": 1.0, "texture": SubResource("inhale_0")}, {"duration": 1.0, "texture": SubResource("inhale_1")}],
+"loop": true,
+"name": &"inhale",
+"speed": 6.0
+}, {
+"frames": [{"duration": 1.0, "texture": SubResource("spit_0")}, {"duration": 1.0, "texture": SubResource("spit_1")}, {"duration": 1.0, "texture": SubResource("spit_2")}],
+"loop": false,
+"name": &"spit",
+"speed": 8.0
+}, {
+"frames": [{"duration": 1.0, "texture": SubResource("inhale_rage_0")}, {"duration": 1.0, "texture": SubResource("inhale_rage_1")}],
+"loop": true,
+"name": &"inhale_rage",
+"speed": 9.0
+}, {
+"frames": [{"duration": 1.0, "texture": SubResource("spit_rage_0")}, {"duration": 1.0, "texture": SubResource("spit_rage_1")}, {"duration": 1.0, "texture": SubResource("spit_rage_2")}],
+"loop": false,
+"name": &"spit_rage",
+"speed": 10.0
 }, {
 "frames": [{"duration": 1.0, "texture": SubResource("enrage_0")}, {"duration": 1.0, "texture": SubResource("enrage_1")}, {"duration": 1.0, "texture": SubResource("enrage_2")}, {"duration": 1.0, "texture": SubResource("enrage_3")}, {"duration": 1.0, "texture": SubResource("enrage_4")}, {"duration": 1.0, "texture": SubResource("enrage_5")}],
 "loop": true,
