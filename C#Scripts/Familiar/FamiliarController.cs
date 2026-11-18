@@ -50,6 +50,8 @@ public partial class FamiliarController : Node
 	
 	public void UpdateDetection()
 	{
+		GD.Print("Current State of Familiar", State);
+		
 		if (_player == null ||
 			DetectionArea == null ||
 			AlertLabel == null)
@@ -155,11 +157,11 @@ public partial class FamiliarController : Node
 
 		if (Input.IsActionJustPressed("familiar_investigate"))
 		{
-			State = FamiliarState.Guiding;
 			AlertLabel.Text = "→";
 
 			_movement.SetGuideTarget(
 				_target.GlobalPosition);
+			State = FamiliarState.Guiding;
 		}
 		else if (Input.IsActionJustPressed("familiar_cancel"))
 		{
@@ -172,12 +174,14 @@ public partial class FamiliarController : Node
 	{
 		if (_target == null || !IsInstanceValid(_target))
 		{
+			GD.Print("Error: Discovery target if invalid!");
 			ReturnToFollowing();
 			return;
 		}
 
 		if (Input.IsActionJustPressed("familiar_cancel"))
 		{
+			GD.Print("Familiar Canceled");
 			_ignoredTarget = _target;
 			ReturnToFollowing();
 			return;
@@ -185,19 +189,36 @@ public partial class FamiliarController : Node
 
 		float distance = _main.GlobalPosition.DistanceTo(
 			_target.GlobalPosition);
+			
+			GD.Print($"Guiding: Distance = {distance:F2}, " +
+					$"RevealDistance = {RevealDistance:F2}");
 
 		if (distance <= RevealDistance)
 		{
+			GD.Print("Success: Familiar has reached target");
 			_movement.StopGuiding();
 			State = FamiliarState.Revealing;
+			
+			RevealDiscovery();
 		}
 	}
 
 	private void RevealDiscovery()
 	{
+		GD.Print("RevealDiscovery() called!");
+		if (_target == null || !IsInstanceValid(_target))
+		{
+			GD.PrintErr("Error: Cannot reveal invalid targets");
+			ReturnToFollowing();
+			return;
+		}
+		
 		_target.Reveal();
-
+		
+		GD.Print("Treasure Reveal() executed!");
+		
 		AlertLabel.Text = "!";
+		AlertLabel.Visible = true;
 		State = FamiliarState.WaitingForInteraction;
 	}
 

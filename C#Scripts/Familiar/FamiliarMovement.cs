@@ -16,6 +16,8 @@ public partial class FamiliarMovement : Node
 	[Export] public float FloatSpeed = 3f;
 
 	[Export] public float GuideSpeed = 120f;
+	
+	[Export] public float GuideStopDistance = 10f;
 
 	private AnimatedSprite2D _animatedSprite;
 	private float _time = 0f;
@@ -46,6 +48,9 @@ public partial class FamiliarMovement : Node
 	{
 		_guideTarget = position;
 		_isGuiding = true;
+		
+		GD.Print("GUIDING ACTIVATED");
+		GD.Print("Guide target: ", _guideTarget);
 	}
 	
 	
@@ -71,11 +76,13 @@ public partial class FamiliarMovement : Node
 		Vector2 direction =
 			targetPosition - familiar.GlobalPosition;
 		
-		if (direction.Length() > StopDistance){
+		float distance = direction.Length();
+		
+		if (distance > GuideStopDistance)
+		{
 			float moveAmount = Mathf.Min(
-					FollowSpeed * dt,
-					direction.Length() - StopDistance
-			);
+				GuideSpeed * dt,
+				distance - GuideStopDistance);
 			
 			familiar.GlobalPosition +=
 				direction.Normalized() * moveAmount;
