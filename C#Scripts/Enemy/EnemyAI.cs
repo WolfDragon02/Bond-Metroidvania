@@ -2,9 +2,13 @@ using Godot;
 using System;
 
 // Base class for optional enemy behaviors that react to the player.
-// An AI only steers EnemyMovement; EnemyMovement still moves the enemy.
+// An AI usually only steers EnemyMovement; EnemyMovement still moves the enemy.
 public abstract partial class EnemyAI : Node
 {
+	// True for AIs that move the enemy themselves (e.g. a jumping boss).
+	// EnemyController then skips EnemyMovement and the hit freeze.
+	public virtual bool ControlsMovement => false;
+
 	// Called by EnemyController every physics frame, before movement.
 	public abstract void UpdateAI(
 		EnemyController enemy, EnemyMovement movement, double delta);
