@@ -5,43 +5,43 @@
 
 [sub_resource type="AtlasTexture" id="walk_0"]
 atlas = ExtResource("1_walk")
-region = Rect2(0, 0, 40, 24)
+region = Rect2(0, 0, 80, 48)
 
 [sub_resource type="AtlasTexture" id="walk_1"]
 atlas = ExtResource("1_walk")
-region = Rect2(40, 0, 40, 24)
+region = Rect2(80, 0, 80, 48)
 
 [sub_resource type="AtlasTexture" id="walk_2"]
 atlas = ExtResource("1_walk")
-region = Rect2(80, 0, 40, 24)
+region = Rect2(160, 0, 80, 48)
 
 [sub_resource type="AtlasTexture" id="walk_3"]
 atlas = ExtResource("1_walk")
-region = Rect2(120, 0, 40, 24)
+region = Rect2(240, 0, 80, 48)
 
 [sub_resource type="AtlasTexture" id="death_0"]
 atlas = ExtResource("2_death")
-region = Rect2(0, 0, 40, 24)
+region = Rect2(0, 0, 80, 48)
 
 [sub_resource type="AtlasTexture" id="death_1"]
 atlas = ExtResource("2_death")
-region = Rect2(40, 0, 40, 24)
+region = Rect2(80, 0, 80, 48)
 
 [sub_resource type="AtlasTexture" id="death_2"]
 atlas = ExtResource("2_death")
-region = Rect2(80, 0, 40, 24)
+region = Rect2(160, 0, 80, 48)
 
 [sub_resource type="AtlasTexture" id="death_3"]
 atlas = ExtResource("2_death")
-region = Rect2(120, 0, 40, 24)
+region = Rect2(240, 0, 80, 48)
 
 [sub_resource type="AtlasTexture" id="death_4"]
 atlas = ExtResource("2_death")
-region = Rect2(160, 0, 40, 24)
+region = Rect2(320, 0, 80, 48)
 
 [sub_resource type="AtlasTexture" id="death_5"]
 atlas = ExtResource("2_death")
-region = Rect2(200, 0, 40, 24)
+region = Rect2(400, 0, 80, 48)
 
 [resource]
 animations = [{
