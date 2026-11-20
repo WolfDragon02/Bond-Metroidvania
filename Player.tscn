@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://bsruevctkac7j" path="res://PlayerCharacterAssets/template_deluxe/individual_sheets/male_hero_template-combo_1_end.png" id="8_efikj"]
 [ext_resource type="Texture2D" uid="uid://bqk8vl7ri5c1y" path="res://PlayerCharacterAssets/template_deluxe/individual_sheets/male_hero_template-walk.png" id="10_jatw7"]
 [ext_resource type="Texture2D" uid="uid://cw1xfd12mykly" path="res://PlayerCharacterAssets/template_deluxe/individual_sheets/male_hero_template-wall_jump.png" id="11_efikj"]
+[ext_resource type="Script" uid="uid://b2oegovtord0j" path="res://C#Scripts/Player/PlayerSpecialPoints.cs" id="18_efikj"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2n1s8"]
 atlas = ExtResource("3_wi0c6")
@@ -537,7 +538,7 @@ metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=488772928]
 sprite_frames = SubResource("SpriteFrames_j41mj")
-animation = &"Light_Attack"
+animation = &"Idle"
 autoplay = "Idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1530706134]
@@ -570,3 +571,6 @@ shape = SubResource("RectangleShape2D_oudfo")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1450553457]
 libraries/ = SubResource("AnimationLibrary_efikj")
+
+[node name="PlayerSpecialPoints" type="Node" parent="." unique_id=684000471]
+script = ExtResource("18_efikj")

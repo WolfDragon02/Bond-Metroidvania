@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://bn2dyddfuwsh5"]
+
+[ext_resource type="Script" uid="uid://chqx2yhkuok34" path="res://C#Scripts/Player/PlayerHud.cs" id="1_tvw2b"]
+
+[node name="PlayerHUD" type="CanvasLayer" unique_id=1385666514]
+script = ExtResource("1_tvw2b")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1727410316]
+offset_right = 127.0
+offset_bottom = 112.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1966909183]
+layout_mode = 2
+
+[node name="HealthLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=708776713]
+layout_mode = 2
+text = "Health"
+
+[node name="HealthBar" type="ProgressBar" parent="MarginContainer/VBoxContainer" unique_id=945573177]
+layout_mode = 2
+value = 100.0
+
+[node name="SpecialPointsLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=466687885]
+layout_mode = 2
+text = "Special Points"
+
+[node name="SpecialPointsBar" type="ProgressBar" parent="MarginContainer/VBoxContainer" unique_id=199442401]
+layout_mode = 2
+value = 100.0

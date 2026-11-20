@@ -22,9 +22,10 @@ public partial class PlayerHealth : Node
 	public int CurrentHealth => _health.CurrentHealth;
 	public int MaxHealth => _health.MaxHealth;
 	public bool IsDead => _health.IsDead;
+    public event Action<int, int>? HealthChanged;
 
-	// Tell the HealthComponent to apply damage.
-	public void TakeDamage(int amount)
+    // Tell the HealthComponent to apply damage.
+    public void TakeDamage(int amount)
 	{
 		_health.TakeDamage(amount);
 	}
@@ -44,10 +45,10 @@ public partial class PlayerHealth : Node
 	// Respond when the player's health changes.
 	private void OnHealthChanged(int current, int max)
 	{
-		GD.Print($"Player Health: {current}/{max}");
+        GD.Print($"Player Health: {current}/{max}");
 
-		// Later: Update the player's health bar UI.
-	}
+        HealthChanged?.Invoke(current, max);
+    }
 
 	// Respond when the player runs out of health.
 	private void OnPlayerDied()
