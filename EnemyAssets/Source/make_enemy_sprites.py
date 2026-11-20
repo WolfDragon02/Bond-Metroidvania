@@ -226,7 +226,7 @@ def crawler_head(nx, ny):
     return CR_HEAD_LIGHT if (nx + 0.2) ** 2 + (ny + 0.4) ** 2 < 0.25 else CR_HEAD
 
 
-def draw_crawler(bob=0, legs=(0, 0, 0), antenna=0, x_eyes=False, squash=0):
+def draw_crawler(bob=0, legs=(0, 0, 0), antenna=0, x_eyes=False, squash=0, alert=False):
     c = Canvas(CR_W, CR_H)
     top = 18 + bob + squash
 
@@ -272,6 +272,14 @@ def draw_crawler(bob=0, legs=(0, 0, 0), antenna=0, x_eyes=False, squash=0):
         c.set(px, top + py, CR_PINCER)
     c.set(39, top - 1, OUTLINE)
     c.set(39, top + 1, OUTLINE)
+
+    if alert:
+        # A "!" above the head when it spots the player.
+        c.rect(28, 0, 29, 3, CR_EYE)
+        c.rect(28, 5, 29, 6, CR_EYE)
+        for x, y in ((27, 0), (27, 1), (27, 2), (27, 3), (30, 0), (30, 1), (30, 2), (30, 3),
+                     (28, 4), (29, 4), (27, 5), (27, 6), (30, 5), (30, 6), (28, 7), (29, 7)):
+            c.set(x, y, OUTLINE)
     return c
 
 
@@ -287,7 +295,18 @@ def crawler_animations():
         f = Canvas(CR_W, CR_H)
         draw_poof(f, 20, 15, t, 9)
         death.append(f)
-    return [("walk", 8, True, walk), ("death", 12, False, death)]
+    # Spotting the player: hops up with a "!".
+    alert = [draw_crawler(bob=-3, legs=(0, 0, 0), antenna=-2, alert=True),
+             draw_crawler(bob=-2, legs=(0, 0, 0), antenna=-1, alert=True)]
+    # Crouches low before pouncing.
+    windup = [draw_crawler(bob=1, legs=(-2, 0, 2), antenna=1),
+              draw_crawler(bob=2, legs=(-2, 0, 2), antenna=2)]
+    # Mid-air with the legs tucked back.
+    pounce = [draw_crawler(bob=-3, legs=(-2, -2, -1), antenna=2),
+              draw_crawler(bob=-3, legs=(-1, -2, -2), antenna=1)]
+    return [("walk", 8, True, walk), ("run", 16, True, walk), ("alert", 8, True, alert),
+            ("windup", 10, True, windup), ("pounce", 10, True, pounce),
+            ("death", 12, False, death)]
 
 
 # ------------------------------------------------------------------ Charger
@@ -618,10 +637,15 @@ def slime_king_animations():
                                       (102, 56, 4, [(-12, -11), (10, -9), (22, -12)]),
                                       (100, 58, 3, [(-20, -10), (-2, -6), (16, -11)]),
                                       (98, 60, 2, [(-14, -5), (6, -12), (24, -7)]))]
-        return idle, walk, windup, jump, hang, fall, land, recover
+        # Sucks in a breath, then leans forward and spits.
+        inhale = [draw_slime_king(w, h, dx=-2, pal=pal, eyes="squint", mouth="grit", look=(2, 0), crown_tilt=t)
+                  for w, h, t in ((90, 70, -2), (86, 74, -3))]
+        spit = [draw_slime_king(w, h, dx=dx, pal=pal, eyes="angry", mouth="open", look=(2, 0), crown_tilt=t)
+                for w, h, dx, t in ((110, 56, 3, 3), (104, 60, 2, 2), (98, 63, 1, 1))]
+        return idle, walk, windup, jump, hang, fall, land, recover, (inhale, spit)
 
-    idle, walk, windup, jump, hang, fall, land, recover = phase(SK_NORMAL, "normal", "smile")
-    r_idle, r_walk, r_windup, r_jump, r_hang, r_fall, r_land, r_recover = phase(SK_RAGE, "angry", "grit")
+    idle, walk, windup, jump, hang, fall, land, recover, spit = phase(SK_NORMAL, "normal", "smile")
+    r_idle, r_walk, r_windup, r_jump, r_hang, r_fall, r_land, r_recover, r_spit = phase(SK_RAGE, "angry", "grit")
 
     enrage = [draw_slime_king(w, h, dx=dx, pal=SK_RAGE if i > 1 else SK_NORMAL, eyes="angry",
                               mouth="open", crown_tilt=dx, steam=i + 1)
@@ -643,8 +667,56 @@ def slime_king_animations():
         ("windup_rage", 12, False, r_windup), ("jump_rage", 8, True, r_jump),
         ("hang_rage", 12, True, r_hang), ("fall_rage", 10, True, r_fall),
         ("land_rage", 16, False, r_land), ("recover_rage", 7, True, r_recover),
+        ("inhale", 6, True, spit[0]), ("spit", 8, False, spit[1]),
+        ("inhale_rage", 9, True, r_spit[0]), ("spit_rage", 10, False, r_spit[1]),
         ("enrage", 10, True, enrage), ("death", 10, False, death),
     ]
+
+
+# The slime globs the Slime King spits. Ball canvas 12x12, splat 20x10.
+SB_W, SB_H = 12, 12
+SP_W, SP_H = 20, 10
+
+
+def draw_slime_ball(pal, w, h):
+    c = Canvas(SB_W, SB_H)
+    cx, cy = SB_W / 2 - 0.5, SB_H / 2 - 0.5
+
+    def fill(nx, ny):
+        if (nx + 0.35) ** 2 + (ny + 0.4) ** 2 < 0.12:
+            return pal["gloss"]
+        if ny > 0.45 or nx > 0.6:
+            return pal["shade"]
+        return pal["body"]
+
+    c.ellipse(cx, cy, w, h, fill)
+    c.outline()
+    return c
+
+
+def draw_slime_splat(pal, t):
+    c = Canvas(SP_W, SP_H)
+    spread = 4 + 5 * t
+    height = 3.5 * (1 - t) + 1
+    c.ellipse(SP_W / 2 - 0.5, SP_H - 2, spread, height,
+              lambda nx, ny: pal["shade"] if ny > 0.2 else pal["body"])
+    for side in (-1, 1):
+        # Droplets flying off to the sides.
+        x = SP_W / 2 + side * (spread + 1 + 2 * t)
+        y = SP_H - 4 - 3 * (1 - t) + 4 * t * t
+        if t < 0.9:
+            c.rect(int(x), int(y), int(x), int(y), pal["light"])
+    c.outline()
+    return c
+
+
+def slime_ball_animations():
+    anims = []
+    for suffix, pal in (("", SK_NORMAL), ("_rage", SK_RAGE)):
+        fly = [draw_slime_ball(pal, w, h) for w, h in ((4.6, 4.6), (5.2, 4.0), (4.6, 4.6), (4.0, 5.2))]
+        splat = [draw_slime_splat(pal, t) for t in (0.0, 0.3, 0.6, 0.9)]
+        anims += [("fly" + suffix, 10, True, fly), ("splat" + suffix, 14, False, splat)]
+    return anims
 
 
 # The ground shockwave the Slime King makes when it lands.
@@ -684,4 +756,5 @@ if __name__ == "__main__":
     export("Charger", charger_animations())
     export("SlimeKing", slime_king_animations())
     export("SlimeKing", shockwave_animations(), prefix="shockwave")
+    export("SlimeKing", slime_ball_animations(), prefix="slimeball")
     print(f"Wrote enemy sprites to {OUT_DIR}")

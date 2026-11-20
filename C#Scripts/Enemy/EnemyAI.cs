@@ -30,4 +30,37 @@ public abstract partial class EnemyAI : Node
 
 		return _player;
 	}
+
+	// True when no wall or floor is between the enemy and the player.
+	// Characters in the way (other enemies, the familiar) don't block it.
+	// eyeHeight lifts the ray off the ground so low bumps don't block it.
+	protected bool CanSee(CollisionObject2D enemy, Node2D player, float eyeHeight)
+	{
+		var exclude = new Godot.Collections.Array<Rid> { enemy.GetRid() };
+		if (player is CollisionObject2D playerBody)
+		{
+			exclude.Add(playerBody.GetRid());
+		}
+
+		var space = enemy.GetWorld2D().DirectSpaceState;
+		for (int i = 0; i < 4; i++)
+		{
+			var query = PhysicsRayQueryParameters2D.Create(
+				enemy.GlobalPosition + new Vector2(0, -eyeHeight),
+				player.GlobalPosition);
+			query.Exclude = exclude;
+
+			var hit = space.IntersectRay(query);
+			if (hit.Count == 0)
+				return true;
+
+			if (hit["collider"].As<Node>() is not CharacterBody2D)
+				return false;
+
+			// Look past the character and try again.
+			exclude.Add(hit["rid"].AsRid());
+		}
+
+		return true;
+	}
 }

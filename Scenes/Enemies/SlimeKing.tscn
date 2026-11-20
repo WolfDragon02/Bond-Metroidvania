@@ -8,6 +8,7 @@
 [ext_resource type="SpriteFrames" path="res://EnemyAssets/SlimeKing/slimeking_frames.tres" id="6_frames"]
 [ext_resource type="SpriteFrames" path="res://EnemyAssets/SlimeKing/shockwave_frames.tres" id="7_shockwave"]
 [ext_resource type="Shader" path="res://EnemyAssets/enemy_flash.gdshader" id="8_flash"]
+[ext_resource type="PackedScene" path="res://Scenes/Enemies/SlimeBall.tscn" id="9_ball"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_flash"]
 resource_local_to_scene = true
@@ -42,7 +43,8 @@ bg_color = Color(0.55, 0.4, 0.95, 1)
 
 [node name="SlimeKing" type="CharacterBody2D"]
 script = ExtResource("1_controller")
-ContactDamage = 15
+ContactDamage = 5
+ContactCooldown = 1.5
 HurtSeconds = 0.1
 MovementSpeed = 70.0
 
@@ -103,6 +105,7 @@ script = ExtResource("3_movement")
 
 [node name="SlimeKingAI" type="Node" parent="."]
 script = ExtResource("4_ai")
+SlimeBallScene = ExtResource("9_ball")
 
 [node name="BossBar" type="CanvasLayer" parent="."]
 layer = 5

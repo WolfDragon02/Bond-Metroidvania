@@ -106,6 +106,13 @@ public partial class EnemyController : Entity
 		UpdateSprite(hurt);
 	}
 
+	// Holds off contact damage for a while, e.g. right after a bigger
+	// attack already hit the player.
+	public void DelayContactDamage(double seconds)
+	{
+		_contactTimer = Math.Max(_contactTimer, seconds);
+	}
+
 	// Tints the sprite toward white: 0 is normal, 1 is fully white.
 	public void SetFlash(float amount)
 	{

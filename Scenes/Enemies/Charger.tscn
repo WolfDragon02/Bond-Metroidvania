@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://C#Scripts/Enemy/ChargerAI.cs" id="4_ai"]
 [ext_resource type="SpriteFrames" path="res://EnemyAssets/Charger/charger_frames.tres" id="5_frames"]
 [ext_resource type="Shader" path="res://EnemyAssets/enemy_flash.gdshader" id="6_flash"]
+[ext_resource type="Script" path="res://C#Scripts/Enemy/EnemyHealthBar.cs" id="7_bar"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_flash"]
 resource_local_to_scene = true
@@ -76,3 +77,8 @@ script = ExtResource("3_movement")
 
 [node name="ChargerAI" type="Node" parent="."]
 script = ExtResource("4_ai")
+
+[node name="HealthBar" type="Node2D" parent="."]
+position = Vector2(0, -84)
+script = ExtResource("7_bar")
+Width = 68.0
