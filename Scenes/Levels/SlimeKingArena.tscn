@@ -1,0 +1,65 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" uid="uid://smfnivpcjxhs" path="res://Player.tscn" id="1_player"]
+[ext_resource type="PackedScene" path="res://Scenes/Enemies/SlimeKing.tscn" id="2_boss"]
+[ext_resource type="PackedScene" uid="uid://dretnwstmdusj" path="res://PauseMenu/Pause Menu.tscn" id="3_pause"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_floor"]
+size = Vector2(1240, 80)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wall"]
+size = Vector2(40, 700)
+
+[node name="SlimeKingArena" type="Node2D"]
+
+[node name="Background" type="Polygon2D" parent="."]
+color = Color(0.11, 0.1, 0.17, 1)
+polygon = PackedVector2Array(-400, -300, 1600, -300, 1600, 1000, -400, 1000)
+
+[node name="Pillars" type="Polygon2D" parent="."]
+color = Color(0.16, 0.14, 0.24, 1)
+polygon = PackedVector2Array(230, 200, 290, 200, 290, 600, 230, 600, 230, 200, 910, 200, 970, 200, 970, 600, 910, 600, 910, 200)
+
+[node name="Floor" type="StaticBody2D" parent="."]
+position = Vector2(600, 640)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+shape = SubResource("RectangleShape2D_floor")
+
+[node name="Visual" type="Polygon2D" parent="Floor"]
+color = Color(0.23, 0.2, 0.31, 1)
+polygon = PackedVector2Array(-620, -40, 620, -40, 620, 360, -620, 360)
+
+[node name="TopLine" type="Polygon2D" parent="Floor"]
+color = Color(0.42, 0.37, 0.56, 1)
+polygon = PackedVector2Array(-620, -40, 620, -40, 620, -34, -620, -34)
+
+[node name="LeftWall" type="StaticBody2D" parent="."]
+position = Vector2(0, 250)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall"]
+shape = SubResource("RectangleShape2D_wall")
+
+[node name="Visual" type="Polygon2D" parent="LeftWall"]
+color = Color(0.23, 0.2, 0.31, 1)
+polygon = PackedVector2Array(-20, -350, 20, -350, 20, 350, -20, 350)
+
+[node name="RightWall" type="StaticBody2D" parent="."]
+position = Vector2(1200, 250)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightWall"]
+shape = SubResource("RectangleShape2D_wall")
+
+[node name="Visual" type="Polygon2D" parent="RightWall"]
+color = Color(0.23, 0.2, 0.31, 1)
+polygon = PackedVector2Array(-20, -350, 20, -350, 20, 350, -20, 350)
+
+[node name="Player" parent="." instance=ExtResource("1_player")]
+position = Vector2(150, 580)
+
+[node name="SlimeKing" parent="." instance=ExtResource("2_boss")]
+position = Vector2(950, 600)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("3_pause")]

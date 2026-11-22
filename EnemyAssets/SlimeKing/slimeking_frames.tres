@@ -1,0 +1,465 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://EnemyAssets/SlimeKing/slimeking_idle.png" id="1_idle"]
+[ext_resource type="Texture2D" path="res://EnemyAssets/SlimeKing/slimeking_walk.png" id="2_walk"]
+[ext_resource type="Texture2D" path="res://EnemyAssets/SlimeKing/slimeking_windup.png" id="3_windup"]
+[ext_resource type="Texture2D" path="res://EnemyAssets/SlimeKing/slimeking_jump.png" id="4_jump"]
+[ext_resource type="Texture2D" path="res://EnemyAssets/SlimeKing/slimeking_hang.png" id="5_hang"]
+[ext_resource type="Texture2D" path="res://EnemyAssets/SlimeKing/slimeking_fall.png" id="6_fall"]
+[ext_resource type="Texture2D" path="res://EnemyAssets/SlimeKing/slimeking_land.png" id="7_land"]
+[ext_resource type="Texture2D" path="res://EnemyAssets/SlimeKing/slimeking_recover.png" id="8_recover"]
+[ext_resource type="Texture2D" path="res://EnemyAssets/SlimeKing/slimeking_idle_rage.png" id="9_idle_rage"]
+[ext_resource type="Texture2D" path="res://EnemyAssets/SlimeKing/slimeking_walk_rage.png" id="10_walk_rage"]
+[ext_resource type="Texture2D" path="res://EnemyAssets/SlimeKing/slimeking_windup_rage.png" id="11_windup_rage"]
+[ext_resource type="Texture2D" path="res://EnemyAssets/SlimeKing/slimeking_jump_rage.png" id="12_jump_rage"]
+[ext_resource type="Texture2D" path="res://EnemyAssets/SlimeKing/slimeking_hang_rage.png" id="13_hang_rage"]
+[ext_resource type="Texture2D" path="res://EnemyAssets/SlimeKing/slimeking_fall_rage.png" id="14_fall_rage"]
+[ext_resource type="Texture2D" path="res://EnemyAssets/SlimeKing/slimeking_land_rage.png" id="15_land_rage"]
+[ext_resource type="Texture2D" path="res://EnemyAssets/SlimeKing/slimeking_recover_rage.png" id="16_recover_rage"]
+[ext_resource type="Texture2D" path="res://EnemyAssets/SlimeKing/slimeking_inhale.png" id="17_inhale"]
+[ext_resource type="Texture2D" path="res://EnemyAssets/SlimeKing/slimeking_spit.png" id="18_spit"]
+[ext_resource type="Texture2D" path="res://EnemyAssets/SlimeKing/slimeking_inhale_rage.png" id="19_inhale_rage"]
+[ext_resource type="Texture2D" path="res://EnemyAssets/SlimeKing/slimeking_spit_rage.png" id="20_spit_rage"]
+[ext_resource type="Texture2D" path="res://EnemyAssets/SlimeKing/slimeking_enrage.png" id="21_enrage"]
+[ext_resource type="Texture2D" path="res://EnemyAssets/SlimeKing/slimeking_death.png" id="22_death"]
+
+[sub_resource type="AtlasTexture" id="idle_0"]
+atlas = ExtResource("1_idle")
+region = Rect2(0, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="idle_1"]
+atlas = ExtResource("1_idle")
+region = Rect2(272, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="idle_2"]
+atlas = ExtResource("1_idle")
+region = Rect2(544, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="idle_3"]
+atlas = ExtResource("1_idle")
+region = Rect2(816, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="walk_0"]
+atlas = ExtResource("2_walk")
+region = Rect2(0, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="walk_1"]
+atlas = ExtResource("2_walk")
+region = Rect2(272, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="walk_2"]
+atlas = ExtResource("2_walk")
+region = Rect2(544, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="walk_3"]
+atlas = ExtResource("2_walk")
+region = Rect2(816, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="walk_4"]
+atlas = ExtResource("2_walk")
+region = Rect2(1088, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="walk_5"]
+atlas = ExtResource("2_walk")
+region = Rect2(1360, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="windup_0"]
+atlas = ExtResource("3_windup")
+region = Rect2(0, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="windup_1"]
+atlas = ExtResource("3_windup")
+region = Rect2(272, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="windup_2"]
+atlas = ExtResource("3_windup")
+region = Rect2(544, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="jump_0"]
+atlas = ExtResource("4_jump")
+region = Rect2(0, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="jump_1"]
+atlas = ExtResource("4_jump")
+region = Rect2(272, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="hang_0"]
+atlas = ExtResource("5_hang")
+region = Rect2(0, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="hang_1"]
+atlas = ExtResource("5_hang")
+region = Rect2(272, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="hang_2"]
+atlas = ExtResource("5_hang")
+region = Rect2(544, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="hang_3"]
+atlas = ExtResource("5_hang")
+region = Rect2(816, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="fall_0"]
+atlas = ExtResource("6_fall")
+region = Rect2(0, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="fall_1"]
+atlas = ExtResource("6_fall")
+region = Rect2(272, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="land_0"]
+atlas = ExtResource("7_land")
+region = Rect2(0, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="land_1"]
+atlas = ExtResource("7_land")
+region = Rect2(272, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="land_2"]
+atlas = ExtResource("7_land")
+region = Rect2(544, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="land_3"]
+atlas = ExtResource("7_land")
+region = Rect2(816, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="recover_0"]
+atlas = ExtResource("8_recover")
+region = Rect2(0, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="recover_1"]
+atlas = ExtResource("8_recover")
+region = Rect2(272, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="recover_2"]
+atlas = ExtResource("8_recover")
+region = Rect2(544, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="recover_3"]
+atlas = ExtResource("8_recover")
+region = Rect2(816, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="idle_rage_0"]
+atlas = ExtResource("9_idle_rage")
+region = Rect2(0, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="idle_rage_1"]
+atlas = ExtResource("9_idle_rage")
+region = Rect2(272, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="idle_rage_2"]
+atlas = ExtResource("9_idle_rage")
+region = Rect2(544, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="idle_rage_3"]
+atlas = ExtResource("9_idle_rage")
+region = Rect2(816, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="walk_rage_0"]
+atlas = ExtResource("10_walk_rage")
+region = Rect2(0, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="walk_rage_1"]
+atlas = ExtResource("10_walk_rage")
+region = Rect2(272, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="walk_rage_2"]
+atlas = ExtResource("10_walk_rage")
+region = Rect2(544, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="walk_rage_3"]
+atlas = ExtResource("10_walk_rage")
+region = Rect2(816, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="walk_rage_4"]
+atlas = ExtResource("10_walk_rage")
+region = Rect2(1088, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="walk_rage_5"]
+atlas = ExtResource("10_walk_rage")
+region = Rect2(1360, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="windup_rage_0"]
+atlas = ExtResource("11_windup_rage")
+region = Rect2(0, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="windup_rage_1"]
+atlas = ExtResource("11_windup_rage")
+region = Rect2(272, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="windup_rage_2"]
+atlas = ExtResource("11_windup_rage")
+region = Rect2(544, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="jump_rage_0"]
+atlas = ExtResource("12_jump_rage")
+region = Rect2(0, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="jump_rage_1"]
+atlas = ExtResource("12_jump_rage")
+region = Rect2(272, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="hang_rage_0"]
+atlas = ExtResource("13_hang_rage")
+region = Rect2(0, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="hang_rage_1"]
+atlas = ExtResource("13_hang_rage")
+region = Rect2(272, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="hang_rage_2"]
+atlas = ExtResource("13_hang_rage")
+region = Rect2(544, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="hang_rage_3"]
+atlas = ExtResource("13_hang_rage")
+region = Rect2(816, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="fall_rage_0"]
+atlas = ExtResource("14_fall_rage")
+region = Rect2(0, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="fall_rage_1"]
+atlas = ExtResource("14_fall_rage")
+region = Rect2(272, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="land_rage_0"]
+atlas = ExtResource("15_land_rage")
+region = Rect2(0, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="land_rage_1"]
+atlas = ExtResource("15_land_rage")
+region = Rect2(272, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="land_rage_2"]
+atlas = ExtResource("15_land_rage")
+region = Rect2(544, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="land_rage_3"]
+atlas = ExtResource("15_land_rage")
+region = Rect2(816, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="recover_rage_0"]
+atlas = ExtResource("16_recover_rage")
+region = Rect2(0, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="recover_rage_1"]
+atlas = ExtResource("16_recover_rage")
+region = Rect2(272, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="recover_rage_2"]
+atlas = ExtResource("16_recover_rage")
+region = Rect2(544, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="recover_rage_3"]
+atlas = ExtResource("16_recover_rage")
+region = Rect2(816, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="inhale_0"]
+atlas = ExtResource("17_inhale")
+region = Rect2(0, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="inhale_1"]
+atlas = ExtResource("17_inhale")
+region = Rect2(272, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="spit_0"]
+atlas = ExtResource("18_spit")
+region = Rect2(0, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="spit_1"]
+atlas = ExtResource("18_spit")
+region = Rect2(272, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="spit_2"]
+atlas = ExtResource("18_spit")
+region = Rect2(544, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="inhale_rage_0"]
+atlas = ExtResource("19_inhale_rage")
+region = Rect2(0, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="inhale_rage_1"]
+atlas = ExtResource("19_inhale_rage")
+region = Rect2(272, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="spit_rage_0"]
+atlas = ExtResource("20_spit_rage")
+region = Rect2(0, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="spit_rage_1"]
+atlas = ExtResource("20_spit_rage")
+region = Rect2(272, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="spit_rage_2"]
+atlas = ExtResource("20_spit_rage")
+region = Rect2(544, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="enrage_0"]
+atlas = ExtResource("21_enrage")
+region = Rect2(0, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="enrage_1"]
+atlas = ExtResource("21_enrage")
+region = Rect2(272, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="enrage_2"]
+atlas = ExtResource("21_enrage")
+region = Rect2(544, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="enrage_3"]
+atlas = ExtResource("21_enrage")
+region = Rect2(816, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="enrage_4"]
+atlas = ExtResource("21_enrage")
+region = Rect2(1088, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="enrage_5"]
+atlas = ExtResource("21_enrage")
+region = Rect2(1360, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="death_0"]
+atlas = ExtResource("22_death")
+region = Rect2(0, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="death_1"]
+atlas = ExtResource("22_death")
+region = Rect2(272, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="death_2"]
+atlas = ExtResource("22_death")
+region = Rect2(544, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="death_3"]
+atlas = ExtResource("22_death")
+region = Rect2(816, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="death_4"]
+atlas = ExtResource("22_death")
+region = Rect2(1088, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="death_5"]
+atlas = ExtResource("22_death")
+region = Rect2(1360, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="death_6"]
+atlas = ExtResource("22_death")
+region = Rect2(1632, 0, 272, 208)
+
+[sub_resource type="AtlasTexture" id="death_7"]
+atlas = ExtResource("22_death")
+region = Rect2(1904, 0, 272, 208)
+
+[resource]
+animations = [{
+"frames": [{"duration": 1.0, "texture": SubResource("idle_0")}, {"duration": 1.0, "texture": SubResource("idle_1")}, {"duration": 1.0, "texture": SubResource("idle_2")}, {"duration": 1.0, "texture": SubResource("idle_3")}],
+"loop": true,
+"name": &"idle",
+"speed": 6.0
+}, {
+"frames": [{"duration": 1.0, "texture": SubResource("walk_0")}, {"duration": 1.0, "texture": SubResource("walk_1")}, {"duration": 1.0, "texture": SubResource("walk_2")}, {"duration": 1.0, "texture": SubResource("walk_3")}, {"duration": 1.0, "texture": SubResource("walk_4")}, {"duration": 1.0, "texture": SubResource("walk_5")}],
+"loop": true,
+"name": &"walk",
+"speed": 10.0
+}, {
+"frames": [{"duration": 1.0, "texture": SubResource("windup_0")}, {"duration": 1.0, "texture": SubResource("windup_1")}, {"duration": 1.0, "texture": SubResource("windup_2")}],
+"loop": false,
+"name": &"windup",
+"speed": 8.0
+}, {
+"frames": [{"duration": 1.0, "texture": SubResource("jump_0")}, {"duration": 1.0, "texture": SubResource("jump_1")}],
+"loop": true,
+"name": &"jump",
+"speed": 8.0
+}, {
+"frames": [{"duration": 1.0, "texture": SubResource("hang_0")}, {"duration": 1.0, "texture": SubResource("hang_1")}, {"duration": 1.0, "texture": SubResource("hang_2")}, {"duration": 1.0, "texture": SubResource("hang_3")}],
+"loop": true,
+"name": &"hang",
+"speed": 10.0
+}, {
+"frames": [{"duration": 1.0, "texture": SubResource("fall_0")}, {"duration": 1.0, "texture": SubResource("fall_1")}],
+"loop": true,
+"name": &"fall",
+"speed": 10.0
+}, {
+"frames": [{"duration": 1.0, "texture": SubResource("land_0")}, {"duration": 1.0, "texture": SubResource("land_1")}, {"duration": 1.0, "texture": SubResource("land_2")}, {"duration": 1.0, "texture": SubResource("land_3")}],
+"loop": false,
+"name": &"land",
+"speed": 14.0
+}, {
+"frames": [{"duration": 1.0, "texture": SubResource("recover_0")}, {"duration": 1.0, "texture": SubResource("recover_1")}, {"duration": 1.0, "texture": SubResource("recover_2")}, {"duration": 1.0, "texture": SubResource("recover_3")}],
+"loop": true,
+"name": &"recover",
+"speed": 5.0
+}, {
+"frames": [{"duration": 1.0, "texture": SubResource("idle_rage_0")}, {"duration": 1.0, "texture": SubResource("idle_rage_1")}, {"duration": 1.0, "texture": SubResource("idle_rage_2")}, {"duration": 1.0, "texture": SubResource("idle_rage_3")}],
+"loop": true,
+"name": &"idle_rage",
+"speed": 8.0
+}, {
+"frames": [{"duration": 1.0, "texture": SubResource("walk_rage_0")}, {"duration": 1.0, "texture": SubResource("walk_rage_1")}, {"duration": 1.0, "texture": SubResource("walk_rage_2")}, {"duration": 1.0, "texture": SubResource("walk_rage_3")}, {"duration": 1.0, "texture": SubResource("walk_rage_4")}, {"duration": 1.0, "texture": SubResource("walk_rage_5")}],
+"loop": true,
+"name": &"walk_rage",
+"speed": 14.0
+}, {
+"frames": [{"duration": 1.0, "texture": SubResource("windup_rage_0")}, {"duration": 1.0, "texture": SubResource("windup_rage_1")}, {"duration": 1.0, "texture": SubResource("windup_rage_2")}],
+"loop": false,
+"name": &"windup_rage",
+"speed": 12.0
+}, {
+"frames": [{"duration": 1.0, "texture": SubResource("jump_rage_0")}, {"duration": 1.0, "texture": SubResource("jump_rage_1")}],
+"loop": true,
+"name": &"jump_rage",
+"speed": 8.0
+}, {
+"frames": [{"duration": 1.0, "texture": SubResource("hang_rage_0")}, {"duration": 1.0, "texture": SubResource("hang_rage_1")}, {"duration": 1.0, "texture": SubResource("hang_rage_2")}, {"duration": 1.0, "texture": SubResource("hang_rage_3")}],
+"loop": true,
+"name": &"hang_rage",
+"speed": 12.0
+}, {
+"frames": [{"duration": 1.0, "texture": SubResource("fall_rage_0")}, {"duration": 1.0, "texture": SubResource("fall_rage_1")}],
+"loop": true,
+"name": &"fall_rage",
+"speed": 10.0
+}, {
+"frames": [{"duration": 1.0, "texture": SubResource("land_rage_0")}, {"duration": 1.0, "texture": SubResource("land_rage_1")}, {"duration": 1.0, "texture": SubResource("land_rage_2")}, {"duration": 1.0, "texture": SubResource("land_rage_3")}],
+"loop": false,
+"name": &"land_rage",
+"speed": 16.0
+}, {
+"frames": [{"duration": 1.0, "texture": SubResource("recover_rage_0")}, {"duration": 1.0, "texture": SubResource("recover_rage_1")}, {"duration": 1.0, "texture": SubResource("recover_rage_2")}, {"duration": 1.0, "texture": SubResource("recover_rage_3")}],
+"loop": true,
+"name": &"recover_rage",
+"speed": 7.0
+}, {
+"frames": [{"duration": 1.0, "texture": SubResource("inhale_0")}, {"duration": 1.0, "texture": SubResource("inhale_1")}],
+"loop": true,
+"name": &"inhale",
+"speed": 6.0
+}, {
+"frames": [{"duration": 1.0, "texture": SubResource("spit_0")}, {"duration": 1.0, "texture": SubResource("spit_1")}, {"duration": 1.0, "texture": SubResource("spit_2")}],
+"loop": false,
+"name": &"spit",
+"speed": 8.0
+}, {
+"frames": [{"duration": 1.0, "texture": SubResource("inhale_rage_0")}, {"duration": 1.0, "texture": SubResource("inhale_rage_1")}],
+"loop": true,
+"name": &"inhale_rage",
+"speed": 9.0
+}, {
+"frames": [{"duration": 1.0, "texture": SubResource("spit_rage_0")}, {"duration": 1.0, "texture": SubResource("spit_rage_1")}, {"duration": 1.0, "texture": SubResource("spit_rage_2")}],
+"loop": false,
+"name": &"spit_rage",
+"speed": 10.0
+}, {
+"frames": [{"duration": 1.0, "texture": SubResource("enrage_0")}, {"duration": 1.0, "texture": SubResource("enrage_1")}, {"duration": 1.0, "texture": SubResource("enrage_2")}, {"duration": 1.0, "texture": SubResource("enrage_3")}, {"duration": 1.0, "texture": SubResource("enrage_4")}, {"duration": 1.0, "texture": SubResource("enrage_5")}],
+"loop": true,
+"name": &"enrage",
+"speed": 10.0
+}, {
+"frames": [{"duration": 1.0, "texture": SubResource("death_0")}, {"duration": 1.0, "texture": SubResource("death_1")}, {"duration": 1.0, "texture": SubResource("death_2")}, {"duration": 1.0, "texture": SubResource("death_3")}, {"duration": 1.0, "texture": SubResource("death_4")}, {"duration": 1.0, "texture": SubResource("death_5")}, {"duration": 1.0, "texture": SubResource("death_6")}, {"duration": 1.0, "texture": SubResource("death_7")}],
+"loop": false,
+"name": &"death",
+"speed": 10.0
+}]

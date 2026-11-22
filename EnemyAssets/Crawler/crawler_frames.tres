@@ -1,31 +1,91 @@
 [gd_resource type="SpriteFrames" format=3 uid="uid://bnnsms8rkpgvw"]
 
-[ext_resource type="Texture2D" uid="uid://clxaovjsvmoys" path="res://EnemyAssets/Crawler/crawler_walk.png" id="1_walk"]
-[ext_resource type="Texture2D" uid="uid://camij42me6vsl" path="res://EnemyAssets/Crawler/crawler_death.png" id="2_death"]
+[ext_resource type="Texture2D" path="res://EnemyAssets/Crawler/crawler_walk.png" id="1_walk"]
+[ext_resource type="Texture2D" path="res://EnemyAssets/Crawler/crawler_run.png" id="2_run"]
+[ext_resource type="Texture2D" path="res://EnemyAssets/Crawler/crawler_alert.png" id="3_alert"]
+[ext_resource type="Texture2D" path="res://EnemyAssets/Crawler/crawler_windup.png" id="4_windup"]
+[ext_resource type="Texture2D" path="res://EnemyAssets/Crawler/crawler_pounce.png" id="5_pounce"]
+[ext_resource type="Texture2D" path="res://EnemyAssets/Crawler/crawler_death.png" id="6_death"]
+
+[sub_resource type="AtlasTexture" id="walk_0"]
+atlas = ExtResource("1_walk")
+region = Rect2(0, 0, 80, 48)
+
+[sub_resource type="AtlasTexture" id="walk_1"]
+atlas = ExtResource("1_walk")
+region = Rect2(80, 0, 80, 48)
+
+[sub_resource type="AtlasTexture" id="walk_2"]
+atlas = ExtResource("1_walk")
+region = Rect2(160, 0, 80, 48)
+
+[sub_resource type="AtlasTexture" id="walk_3"]
+atlas = ExtResource("1_walk")
+region = Rect2(240, 0, 80, 48)
+
+[sub_resource type="AtlasTexture" id="run_0"]
+atlas = ExtResource("2_run")
+region = Rect2(0, 0, 80, 48)
+
+[sub_resource type="AtlasTexture" id="run_1"]
+atlas = ExtResource("2_run")
+region = Rect2(80, 0, 80, 48)
+
+[sub_resource type="AtlasTexture" id="run_2"]
+atlas = ExtResource("2_run")
+region = Rect2(160, 0, 80, 48)
+
+[sub_resource type="AtlasTexture" id="run_3"]
+atlas = ExtResource("2_run")
+region = Rect2(240, 0, 80, 48)
+
+[sub_resource type="AtlasTexture" id="alert_0"]
+atlas = ExtResource("3_alert")
+region = Rect2(0, 0, 80, 48)
+
+[sub_resource type="AtlasTexture" id="alert_1"]
+atlas = ExtResource("3_alert")
+region = Rect2(80, 0, 80, 48)
+
+[sub_resource type="AtlasTexture" id="windup_0"]
+atlas = ExtResource("4_windup")
+region = Rect2(0, 0, 80, 48)
+
+[sub_resource type="AtlasTexture" id="windup_1"]
+atlas = ExtResource("4_windup")
+region = Rect2(80, 0, 80, 48)
+
+[sub_resource type="AtlasTexture" id="pounce_0"]
+atlas = ExtResource("5_pounce")
+region = Rect2(0, 0, 80, 48)
+
+[sub_resource type="AtlasTexture" id="pounce_1"]
+atlas = ExtResource("5_pounce")
+region = Rect2(80, 0, 80, 48)
 
 [sub_resource type="AtlasTexture" id="death_0"]
-atlas = ExtResource("2_death")
-region = Rect2(0, 0, 40, 24)
+atlas = ExtResource("6_death")
+region = Rect2(0, 0, 80, 48)
 
 [sub_resource type="AtlasTexture" id="death_1"]
-atlas = ExtResource("2_death")
-region = Rect2(40, 0, 40, 24)
+atlas = ExtResource("6_death")
+region = Rect2(80, 0, 80, 48)
 
 [sub_resource type="AtlasTexture" id="death_2"]
-atlas = ExtResource("2_death")
-region = Rect2(80, 0, 40, 24)
+atlas = ExtResource("6_death")
+region = Rect2(160, 0, 80, 48)
 
 [sub_resource type="AtlasTexture" id="death_3"]
-atlas = ExtResource("2_death")
-region = Rect2(120, 0, 40, 24)
+atlas = ExtResource("6_death")
+region = Rect2(240, 0, 80, 48)
 
 [sub_resource type="AtlasTexture" id="death_4"]
-atlas = ExtResource("2_death")
-region = Rect2(160, 0, 40, 24)
+atlas = ExtResource("6_death")
+region = Rect2(320, 0, 80, 48)
 
 [sub_resource type="AtlasTexture" id="death_5"]
-atlas = ExtResource("2_death")
-region = Rect2(200, 0, 40, 24)
+atlas = ExtResource("6_death")
+region = Rect2(400, 0, 80, 48)
 
 [sub_resource type="AtlasTexture" id="walk_0"]
 atlas = ExtResource("1_walk")
@@ -49,22 +109,28 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("death_0")
 }, {
-"duration": 1.0,
-"texture": SubResource("death_1")
+"frames": [{"duration": 1.0, "texture": SubResource("run_0")}, {"duration": 1.0, "texture": SubResource("run_1")}, {"duration": 1.0, "texture": SubResource("run_2")}, {"duration": 1.0, "texture": SubResource("run_3")}],
+"loop": true,
+"name": &"run",
+"speed": 16.0
 }, {
-"duration": 1.0,
-"texture": SubResource("death_2")
+"frames": [{"duration": 1.0, "texture": SubResource("alert_0")}, {"duration": 1.0, "texture": SubResource("alert_1")}],
+"loop": true,
+"name": &"alert",
+"speed": 8.0
 }, {
-"duration": 1.0,
-"texture": SubResource("death_3")
+"frames": [{"duration": 1.0, "texture": SubResource("windup_0")}, {"duration": 1.0, "texture": SubResource("windup_1")}],
+"loop": true,
+"name": &"windup",
+"speed": 10.0
 }, {
-"duration": 1.0,
-"texture": SubResource("death_4")
+"frames": [{"duration": 1.0, "texture": SubResource("pounce_0")}, {"duration": 1.0, "texture": SubResource("pounce_1")}],
+"loop": true,
+"name": &"pounce",
+"speed": 10.0
 }, {
-"duration": 1.0,
-"texture": SubResource("death_5")
-}],
-"loop": 0,
+"frames": [{"duration": 1.0, "texture": SubResource("death_0")}, {"duration": 1.0, "texture": SubResource("death_1")}, {"duration": 1.0, "texture": SubResource("death_2")}, {"duration": 1.0, "texture": SubResource("death_3")}, {"duration": 1.0, "texture": SubResource("death_4")}, {"duration": 1.0, "texture": SubResource("death_5")}],
+"loop": false,
 "name": &"death",
 "speed": 12.0
 }, {

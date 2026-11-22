@@ -84,16 +84,33 @@ public partial class EnemyController : Entity
 			_hurtTimer -= delta;
 			SetFlash(_hurtTimer > 0 ? 1f : 0f);
 		}
+
+		if (_ai != null && _ai.ControlsMovement)
+		{
+			// Bosses keep moving through hits; they only flash.
+			_ai.UpdateAI(this, _movement, delta);
+			hurt = false;
+		}
 		else
 		{
-			_ai?.UpdateAI(this, _movement, delta);
-		}
+			if (!hurt)
+			{
+				_ai?.UpdateAI(this, _movement, delta);
+			}
 
-		_movement.UpdateMovement(this, delta, canWalk: !hurt);
+			_movement.UpdateMovement(this, delta, canWalk: !hurt);
+		}
 
 		_contactTimer -= delta;
 		DealContactDamage();
 		UpdateSprite(hurt);
+	}
+
+	// Holds off contact damage for a while, e.g. right after a bigger
+	// attack already hit the player.
+	public void DelayContactDamage(double seconds)
+	{
+		_contactTimer = Math.Max(_contactTimer, seconds);
 	}
 
 	// Tints the sprite toward white: 0 is normal, 1 is fully white.
