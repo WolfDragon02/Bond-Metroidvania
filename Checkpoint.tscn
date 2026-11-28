@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://wajtjlebepms"]
+
+[ext_resource type="Script" uid="uid://cx5g135lj7mgq" path="res://Checkpoint.cs" id="1_ir6d7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ghrau"]
+size = Vector2(24, 55)
+
+[node name="Checkpoint" type="Area2D" unique_id=1597725991]
+script = ExtResource("1_ir6d7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=650701368]
+position = Vector2(-2, -17.5)
+shape = SubResource("RectangleShape2D_ghrau")
+
+[node name="SpawnPoint" type="Marker2D" parent="." unique_id=1575308713]
+position = Vector2(-1, -16)
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=453978517]

@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://drvd43i0eek4"]
 
 [ext_resource type="PackedScene" uid="uid://smfnivpcjxhs" path="res://Player.tscn" id="2_oy1tr"]
+[ext_resource type="PackedScene" uid="uid://wajtjlebepms" path="res://Checkpoint.tscn" id="4_k2kcu"]
 [ext_resource type="PackedScene" uid="uid://48ovpkom2b52" path="res://Familiar.tscn" id="4_ogl2o"]
 [ext_resource type="PackedScene" uid="uid://dretnwstmdusj" path="res://PauseMenu/Pause Menu.tscn" id="4_ucm2n"]
 
@@ -26,7 +27,7 @@ size = Vector2(268.875, 33.25)
 size = Vector2(863, 49)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t27ko"]
-size = Vector2(964, 708.75)
+size = Vector2(964, 712)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_harsr"]
 size = Vector2(452, 25.25)
@@ -171,7 +172,7 @@ shape = SubResource("RectangleShape2D_3kj8q")
 [node name="StaticBody2D14" type="StaticBody2D" parent="." unique_id=1655366693]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D14" unique_id=101336062]
-position = Vector2(4061.625, -371)
+position = Vector2(4060, -371)
 rotation = 1.5707964
 shape = SubResource("RectangleShape2D_t27ko")
 
@@ -225,3 +226,6 @@ shape = SubResource("RectangleShape2D_72qw2")
 position = Vector2(1120, -1048)
 rotation = 1.5707964
 shape = SubResource("RectangleShape2D_mdnay")
+
+[node name="Checkpoint" parent="." unique_id=1597725991 instance=ExtResource("4_k2kcu")]
+position = Vector2(4249, 264)
